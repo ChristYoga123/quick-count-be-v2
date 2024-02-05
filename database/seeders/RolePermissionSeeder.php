@@ -22,7 +22,7 @@ class RolePermissionSeeder extends Seeder
         $enumerator = Role::findOrCreate('Enumerator', 'web');
 
         // Create Admin Permissions
-        $this->createPermissionRoles('Roles', 'web');
+        $this->createPermissionRoles('Peran', 'web');
         // Create Other Permissions
 
         // Assign Permissions to Roles

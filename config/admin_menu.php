@@ -9,15 +9,15 @@ return [
             'permission' => '',
         ],
         [
-            'title' => 'Settings',
+            'title' => 'Setelan',
             'icon' => 'ti ti-settings',
             'url' => 'admin/settings/*',
-            'permission' => ['Roles.web.index'],
+            'permission' => ['Peran.web.index'],
             'sub' => [
                 [
                     'title' => 'Peran & Hak Akses',
                     'url' => 'admin/settings/roles',
-                    'permission' => ['Roles.web.index'],
+                    'permission' => ['Peran.web.index'],
                 ]
             ]
         ]
