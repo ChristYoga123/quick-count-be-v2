@@ -31,7 +31,7 @@
         @foreach (config('admin_menu.admin') as $menu)
             @if (isset($menu['sub']))
                 @if (Auth::user()->hasAnyPermission($menu['permission']))
-                    <li class="menu-item {{ Route::is($menu['route']) ? 'active open' : '' }}">
+                    <li class="menu-item {{ Request::is($menu['url']) ? 'active open' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons {{ $menu['icon'] }}"></i>
                             <div data-i18n="{{ $menu['title'] }}">{{ $menu['title'] }}</div>
@@ -41,8 +41,8 @@
                             @foreach ($menu['sub'] as $sub)
                                 @if (Auth::user()->can($sub['permission']))
                                     <li
-                                        class="menu-item {{ Route::is($sub['route']) && Route::is($menu['route']) ? 'active' : '' }}">
-                                        <a href="{{ route($sub['route']) }}" class="menu-link">
+                                        class="menu-item {{ Request::is($sub['url']) && Request::is($menu['url']) ? 'active' : '' }}">
+                                        <a href="{{ url($sub['url']) }}" class="menu-link">
                                             <div data-i18n="{{ $sub['title'] }}">{{ $sub['title'] }}</div>
                                         </a>
                                     </li>
@@ -53,15 +53,15 @@
                 @endif
             @else
                 @if (Auth::user()->can($menu['permission']))
-                    <li class="menu-item {{ Route::is($menu['route']) ? 'active open' : '' }}">
-                        <a href="{{ route($menu['route']) }}" class="menu-link">
+                    <li class="menu-item {{ Request::is($menu['url']) ? 'active open' : '' }}">
+                        <a href="{{ url($menu['url']) }}" class="menu-link">
                             <i class="menu-icon tf-icons {{ $menu['icon'] }}"></i>
                             <div data-i18n="{{ $menu['title'] }}">{{ $menu['title'] }}</div>
                         </a>
                     </li>
                 @else
-                    <li class="menu-item {{ Route::is($menu['route']) ? 'active open' : '' }}">
-                        <a href="{{ route($menu['route']) }}" class="menu-link">
+                    <li class="menu-item {{ Request::is($menu['url']) ? 'active open' : '' }}">
+                        <a href="{{ url($menu['url']) }}" class="menu-link">
                             <i class="menu-icon tf-icons {{ $menu['icon'] }}"></i>
                             <div data-i18n="{{ $menu['title'] }}">{{ $menu['title'] }}</div>
                         </a>

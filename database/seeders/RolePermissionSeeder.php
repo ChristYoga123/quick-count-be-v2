@@ -15,21 +15,21 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         // Create Admin Dashboard Roles
-        $admin = Role::findOrCreate('Admin', 'admin');
+        $admin = Role::findOrCreate('Admin', 'web');
         // Create Other Roles
-        $surveyor = Role::findOrCreate('Surveyor', 'admin');
-        $spotChecker = Role::findOrCreate('Spot Checker', 'admin');
-        $enumerator = Role::findOrCreate('Enumerator', 'admin');
+        $surveyor = Role::findOrCreate('Surveyor', 'web');
+        $spotChecker = Role::findOrCreate('Spot Checker', 'web');
+        $enumerator = Role::findOrCreate('Enumerator', 'web');
 
         // Create Admin Permissions
-        $this->createPermissionRoles('Roles', 'admin');
+        $this->createPermissionRoles('Roles', 'web');
         // Create Other Permissions
 
         // Assign Permissions to Roles
         $admin->givePermissionTo(Permission::all());
     }
 
-    private function createPermissionRoles($resources, $guard = 'admin')
+    private function createPermissionRoles($resources, $guard = 'web')
     {
         Permission::findOrCreate($resources . '.' . $guard . '.index', $guard);
         Permission::findOrCreate($resources . '.' . $guard . '.show', $guard);

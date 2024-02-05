@@ -5,19 +5,19 @@ return [
         [
             'title' => 'Dashboard',
             'icon' => 'ti ti-home',
-            'url' => '/admin/dashboard',
+            'url' => 'admin/dashboard',
             'permission' => '',
         ],
         [
             'title' => 'Settings',
             'icon' => 'ti ti-settings',
-            'url' => '/admin/settings/*',
-            'permission' => ['Roles.admin.index'],
+            'url' => 'admin/settings/*',
+            'permission' => ['Roles.web.index'],
             'sub' => [
                 [
-                    'title' => 'Roles',
-                    'url' => '/admin/settings/roles',
-                    'permission' => ['Roles.admin.index'],
+                    'title' => 'Peran & Hak Akses',
+                    'url' => 'admin/settings/roles',
+                    'permission' => ['Roles.web.index'],
                 ]
             ]
         ]
