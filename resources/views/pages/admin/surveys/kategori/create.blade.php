@@ -14,8 +14,8 @@
                                 <label for="title" class="form-label">Judul Survey</label>
                                 <select id="title" class=" form-select @error('survey_title_id') is-invalid  @enderror"
                                     data-allow-clear="true" name="survey_title_id">
-                                    @foreach ($juduls as $judul)
-                                        <option value="{{ $judul->id }}">{{ $judul->judul }}</option>
+                                    @foreach ($surveyTitles as $surveyTitle)
+                                        <option value="{{ $surveyTitle->id }}">{{ $surveyTitle->judul }}</option>
                                     @endforeach
                                 </select>
                                 @error('survey_title_id')

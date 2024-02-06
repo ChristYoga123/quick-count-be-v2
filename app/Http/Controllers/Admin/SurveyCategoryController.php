@@ -33,7 +33,7 @@ class SurveyCategoryController extends Controller
         $this->confirmAuthorization('create');
         return view('pages.admin.surveys.kategori.create', [
             'title' => 'Tambah Kategori Survey',
-            'juduls' => SurveyTitle::all(),
+            'surveyTitles' => SurveyTitle::all(),
         ]);
     }
 
@@ -77,7 +77,7 @@ class SurveyCategoryController extends Controller
         return view('pages.admin.surveys.kategori.edit', [
             'title' => 'Edit Kategori Survey',
             'kategori' => $kategori,
-            'juduls' => SurveyTitle::all(),
+            'surveyTitles' => SurveyTitle::all(),
         ]);
     }
 
