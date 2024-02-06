@@ -12,7 +12,7 @@ return [
             'title' => 'Data Master',
             'icon' => 'ti ti-folder',
             'url' => 'admin/master/*',
-            'permission' => ['TPS.web.index', 'Dapil.web.index'],
+            'permission' => ['TPS.web.index', 'Dapil.web.index', 'Partai.web.index', 'Caleg.web.index'],
             'sub' => [
                 [
                     'title' => 'Petugas',
@@ -33,6 +33,11 @@ return [
                     'title' => 'Partai',
                     'url' => 'admin/master/partai',
                     'permission' => ['Partai.web.index'],
+                ],
+                [
+                    'title' => 'Caleg',
+                    'url' => 'admin/master/caleg',
+                    'permission' => ['Caleg.web.index'],
                 ]
             ]
         ],
