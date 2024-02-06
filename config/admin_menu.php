@@ -9,6 +9,19 @@ return [
             'permission' => '',
         ],
         [
+            'title' => 'Data Master',
+            'icon' => 'ti ti-folder',
+            'url' => 'admin/master/*',
+            'permission' => ['TPS.web.index'],
+            'sub' => [
+                [
+                    'title' => 'TPS',
+                    'url' => 'admin/master/tps',
+                    'permission' => ['TPS.web.index'],
+                ]
+            ]
+        ],
+        [
             'title' => 'Setelan',
             'icon' => 'ti ti-settings',
             'url' => 'admin/settings/*',

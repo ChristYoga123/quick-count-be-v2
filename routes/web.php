@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TPSController;
+use App\Models\TPS;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +22,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::prefix('settings')->name('settings.')->group(function () {
         Route::resource('roles', RoleController::class);
+    });
+    Route::prefix('master')->name('master.')->group(function () {
+        Route::resource('tps', TPSController::class);
+        Route::get('kabupaten/{provinceName}', [TPSController::class, 'getCities'])->name('getCities');
+        Route::get('kecamatan/{cityName}', [TPSController::class, 'getDistricts'])->name('getDistricts');
+        Route::get('kelurahan/{districtName}', [TPSController::class, 'getSubDistricts'])->name('getSubDistricts');
     });
 });
