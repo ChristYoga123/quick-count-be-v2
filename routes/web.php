@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DapilController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PetugasController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TPSController;
 use App\Models\TPS;
@@ -30,5 +31,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('kecamatan/{cityName}', [TPSController::class, 'getDistricts'])->name('getDistricts');
         Route::get('kelurahan/{districtName}', [TPSController::class, 'getSubDistricts'])->name('getSubDistricts');
         Route::resource('dapil', DapilController::class);
+        Route::resource('petugas', PetugasController::class);
     });
 });

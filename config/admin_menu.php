@@ -15,6 +15,11 @@ return [
             'permission' => ['TPS.web.index', 'Dapil.web.index'],
             'sub' => [
                 [
+                    'title' => 'Petugas',
+                    'url' => 'admin/master/petugas',
+                    'permission' => ['Petugas.web.index'],
+                ],
+                [
                     'title' => 'TPS',
                     'url' => 'admin/master/tps',
                     'permission' => ['TPS.web.index'],
