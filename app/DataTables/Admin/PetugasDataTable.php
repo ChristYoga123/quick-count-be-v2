@@ -29,9 +29,6 @@ class PetugasDataTable extends DataTable
             })
             ->addColumn('action', function ($user) {
                 $button = '';
-                if (Auth::user()->can($this->permission . '.show')) {
-                    $button .= '<a href="' . route('admin.master.petugas.show', $user->id) . '" class=""btn btn-sm btn-icon me-2"><i class="ti ti-eye"></i></a>';
-                }
                 if (Auth::user()->can($this->permission . '.edit')) {
                     $button .= '<a href="' . route('admin.master.petugas.edit', $user->id) . '" class="btn btn-sm btn-icon ms-2"><i class="ti ti-edit"></i></a>';
                 }
