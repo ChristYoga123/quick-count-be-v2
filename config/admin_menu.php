@@ -28,6 +28,11 @@ return [
                     'title' => 'Dapil',
                     'url' => 'admin/master/dapil',
                     'permission' => ['Dapil.web.index'],
+                ],
+                [
+                    'title' => 'Partai',
+                    'url' => 'admin/master/partai',
+                    'permission' => ['Partai.web.index'],
                 ]
             ]
         ],

@@ -7,9 +7,9 @@
         <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-semibold mb-4">{{ $title }}</h4>
 
-            @can('TPS.web.create')
+            @can('Partai.web.create')
                 <div class="mb-4" style="width: 15%">
-                    <a href="{{ route('admin.master.tps.create') }}" class="btn btn-primary mb-2 text-nowrap">
+                    <a href="{{ route('admin.master.partai.create') }}" class="btn btn-primary mb-2 text-nowrap">
                         Tambah {{ $title }}
                     </a>
                 </div>
@@ -57,7 +57,7 @@
         </script>
     @endif
     <script>
-        function deleteTPS(id) {
+        function deletePartai(id) {
             Swal.fire({
                 title: 'Apakah anda yakin?',
                 text: "Anda tidak akan dapat mengembalikan data yang telah dihapus!",

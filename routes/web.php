@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DapilController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PartaiController;
 use App\Http\Controllers\Admin\PetugasController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TPSController;
@@ -32,5 +33,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('kelurahan/{districtName}', [TPSController::class, 'getSubDistricts'])->name('getSubDistricts');
         Route::resource('dapil', DapilController::class);
         Route::resource('petugas', PetugasController::class);
+        Route::resource('partai', PartaiController::class);
     });
 });
