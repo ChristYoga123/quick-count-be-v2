@@ -137,12 +137,12 @@
                                                                 </div>
                                                                 <div class="form-check me-3 me-lg-5">
                                                                     <input class="form-check-input" type="checkbox"
-                                                                        id="{{ $module }}Delete"
+                                                                        id="{{ $module }}Destroy"
                                                                         name="addPermissions[]"
-                                                                        value="{{ $module }}.web.delete" />
+                                                                        value="{{ $module }}.web.destroy" />
                                                                     <label class="form-check-label"
-                                                                        for="{{ $module }}Delete">
-                                                                        Delete </label>
+                                                                        for="{{ $module }}Destroy">
+                                                                        Destroy </label>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -280,12 +280,12 @@
                                                                 </div>
                                                                 <div class="form-check me-3 me-lg-5">
                                                                     <input class="form-check-input" type="checkbox"
-                                                                        id="{{ $module }}Delete"
+                                                                        id="{{ $module }}Destroy"
                                                                         name="editPermissions[]"
-                                                                        value="{{ $module }}.web.delete" />
+                                                                        value="{{ $module }}.web.destroy" />
                                                                     <label class="form-check-label"
-                                                                        for="{{ $module }}Delete">
-                                                                        Delete </label>
+                                                                        for="{{ $module }}Destroy">
+                                                                        Destroy </label>
                                                                 </div>
                                                             </div>
                                                         </td>
