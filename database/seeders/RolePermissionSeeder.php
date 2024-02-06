@@ -29,6 +29,7 @@ class RolePermissionSeeder extends Seeder
         $this->createPermissionRoles('Petugas', 'web');
         $this->createPermissionRoles('Partai', 'web');
         $this->createPermissionRoles('Caleg', 'web');
+        $this->createPermissionRoles('Capres', 'web');
 
         // Assign Permissions to Roles
         $admin->givePermissionTo(Permission::all());
