@@ -12,12 +12,17 @@ return [
             'title' => 'Data Master',
             'icon' => 'ti ti-folder',
             'url' => 'admin/master/*',
-            'permission' => ['TPS.web.index'],
+            'permission' => ['TPS.web.index', 'Dapil.web.index'],
             'sub' => [
                 [
                     'title' => 'TPS',
                     'url' => 'admin/master/tps',
                     'permission' => ['TPS.web.index'],
+                ],
+                [
+                    'title' => 'Dapil',
+                    'url' => 'admin/master/dapil',
+                    'permission' => ['Dapil.web.index'],
                 ]
             ]
         ],
