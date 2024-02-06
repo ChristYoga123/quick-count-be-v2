@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Admin;
 
-use App\Models\SurveyCategory;
+use App\Models\SurveyQuestion;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
@@ -13,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SurveyCategoryDataTable extends DataTable
+class SurveyQuestionDataTable extends DataTable
 {
     public $permission = "Survey.web";
     /**
@@ -24,19 +24,17 @@ class SurveyCategoryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('judul', function (SurveyCategory $surveyCategory) {
-                return $surveyCategory->SurveyTitle->judul;
-            })
-            ->addColumn('action', function (SurveyCategory $surveyCategory) {
+            ->escapeColumns([])
+            ->addColumn('action', function ($surveyQuestion) {
                 $button = "";
                 if (Auth::user()->can($this->permission . '.edit')) {
-                    $button .= '<a href="' . route("admin.survey.kategori.edit", $surveyCategory->id) . '" class="btn btn-sm btn-icon me-2"><i class="ti ti-edit"></i></a>';
+                    $button .= '<a href="' . route("admin.survey.pertanyaan.edit", $surveyQuestion->id) . '" class="btn btn-sm btn-icon me-2"><i class="ti ti-edit"></i></a>';
                 }
                 if (Auth::user()->can($this->permission . '.destroy')) {
-                    $button .= '<form id="deleteKategori' . $surveyCategory->id . '" action="' . route('admin.survey.kategori.destroy', $surveyCategory->id) . '" method="post" class="d-inline" enctype="multipart/form-data">
+                    $button .= '<form id="deletePertanyaan' . $surveyQuestion->id . '" action="' . route('admin.survey.pertanyaan.destroy', $surveyQuestion->id) . '" method="post" class="d-inline" enctype="multipart/form-data">
                                 <input type="hidden" name="_token" value="' . csrf_token() . '">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="button" onclick="deleteKategori(' . $surveyCategory->id . ')" class="btn btn-sm btn-icon"><i class="ti ti-trash"></i></button>
+                                <button type="button" onclick="deletePertanyaan(' . $surveyQuestion->id . ')" class="btn btn-sm btn-icon"><i class="ti ti-trash"></i></button>
                                 </form>
                     ';
                 }
@@ -48,9 +46,16 @@ class SurveyCategoryDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(SurveyCategory $model): QueryBuilder
+    public function query(SurveyQuestion $model): QueryBuilder
     {
-        return $model->newQuery()->with('SurveyTitle');
+        $titleId = $this->request()->get('survey_title_id');
+        $query = $model->newQuery();
+        if ($titleId) {
+            $query->whereHas('SurveyCategory', function ($query) use ($titleId) {
+                $query->where('survey_title_id', $titleId);
+            });
+        }
+        return $query;
     }
 
     /**
@@ -59,13 +64,20 @@ class SurveyCategoryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('surveycategory-table')
+            ->setTableId('surveyquestion-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
             ->orderBy(0, 'asc')
             ->selectStyleSingle()
-            ->buttons([]);
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -75,13 +87,13 @@ class SurveyCategoryDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('nama'),
-            Column::computed('judul')
-                ->exportable(false)
-                ->printable(false),
+            Column::make('index'),
+            Column::make('question'),
+            Column::make('type'),
             Column::computed('action')
                 ->exportable(false)
-                ->printable(false),
+                ->printable(false)
+                ->addClass('text-center'),
         ];
     }
 
@@ -90,6 +102,6 @@ class SurveyCategoryDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'SurveyCategory_' . date('YmdHis');
+        return 'SurveyQuestion_' . date('YmdHis');
     }
 }
