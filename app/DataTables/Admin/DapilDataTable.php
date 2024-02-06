@@ -39,6 +39,13 @@ class DapilDataTable extends DataTable
                 }
                 return $button;
             })
+            ->addColumn('kecamatan', function ($dapil) {
+                $list = '';
+                foreach (json_decode($dapil->kecamatan) as $kecamatan) {
+                    $list .= '<i class="ti ti-circle"></i> <span class="my-auto">' . $kecamatan . '</span><br>';
+                }
+                return $list;
+            })
             ->setRowId('id')
             ->escapeColumns([]);
     }
@@ -81,7 +88,9 @@ class DapilDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('index'),
-            Column::make('kecamatan'),
+            Column::computed('kecamatan')
+                ->exportable(true)
+                ->printable(true),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
