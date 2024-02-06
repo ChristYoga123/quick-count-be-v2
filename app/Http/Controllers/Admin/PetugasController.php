@@ -68,7 +68,11 @@ class PetugasController extends Controller
      */
     public function edit(User $petuga)
     {
-        //
+        $this->confirmAuthorization('edit');
+        return view('pages.admin.master.users.edit', [
+            'title' => 'Edit Petugas',
+            'petuga' => $petuga
+        ]);
     }
 
     /**
@@ -76,7 +80,20 @@ class PetugasController extends Controller
      */
     public function update(Request $request, User $petuga)
     {
-        //
+        $this->confirmAuthorization('update');
+        $request->validate([
+            'password' => 'required|min:8|confirmed',
+        ]);
+        DB::beginTransaction();
+        try {
+            $petuga->password = bcrypt($request->password);
+            $petuga->save();
+            DB::commit();
+            return redirect()->route('admin.master.petugas.index')->with('success', 'Petugas berhasil diubah.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.master.petugas.index')->with('error', $e->getMessage());
+        }
     }
 
     /**
