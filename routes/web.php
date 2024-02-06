@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CalegController;
 use App\Http\Controllers\Admin\CapresController;
+use App\Http\Controllers\Admin\ConditionalQuestionController;
 use App\Http\Controllers\Admin\DapilController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PartaiController;
@@ -47,5 +48,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::resource('judul', SurveyTitleController::class);
         Route::resource('kategori', SurveyCategoryController::class);
         Route::resource('pertanyaan', SurveyQuestionController::class);
+        Route::resource('perkondisian', ConditionalQuestionController::class);
     });
 });
