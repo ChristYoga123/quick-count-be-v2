@@ -9,4 +9,9 @@ class Capres extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function SuaraPilpres()
+    {
+        return $this->hasMany(SuaraPilpres::class);
+    }
 }

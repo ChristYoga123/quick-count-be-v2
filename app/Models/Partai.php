@@ -18,4 +18,9 @@ class Partai extends Model implements HasMedia
         $this->addMediaCollection('partai')
             ->singleFile();
     }
+
+    public function SuaraPilpars()
+    {
+        return $this->hasMany(SuaraPilpar::class);
+    }
 }

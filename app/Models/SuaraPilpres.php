@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Dapil extends Model
+class SuaraPilpres extends Model
 {
     use HasFactory;
 
@@ -13,16 +13,11 @@ class Dapil extends Model
 
     public function Pilpres()
     {
-        return $this->hasMany(Pilpres::class);
+        return $this->belongsTo(Pilpres::class);
     }
 
-    public function Pilpars()
+    public function Capres()
     {
-        return $this->hasMany(Pilpar::class);
-    }
-
-    public function Calegs()
-    {
-        return $this->hasMany(Caleg::class);
+        return $this->belongsTo(Capres::class);
     }
 }

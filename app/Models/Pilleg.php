@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Caleg extends Model
+class Pilleg extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
-
-    public function Partai()
-    {
-        return $this->belongsTo(Partai::class);
-    }
 
     public function Dapil()
     {
