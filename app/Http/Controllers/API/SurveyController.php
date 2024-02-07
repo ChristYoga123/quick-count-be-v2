@@ -38,7 +38,7 @@ class SurveyController extends Controller
         $request->validate([
             'answers' => 'required|array',
             'answers.*.survey_question_id' => 'required|exists:survey_questions,id',
-            'answers.*.answer' => 'nullable'
+            'answers.*.answer' => 'nullable',
         ]);
         DB::beginTransaction();
         try {
