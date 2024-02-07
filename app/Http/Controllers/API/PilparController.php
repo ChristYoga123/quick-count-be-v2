@@ -34,6 +34,7 @@ class PilparController extends Controller
             'hasil_suara_sah.partai_id' => 'integer|exists:partai,id',
             'hasil_suara_sah.jumlah_suara' => 'integer',
             'hasil_suara_tidak_sah' => 'required|integer',
+            'jumlah_dpt' => 'required|integer',
             'laporan' => 'required|string'
         ]);
 
@@ -43,7 +44,8 @@ class PilparController extends Controller
                 'dapil_id' => $request->dapil_id,
                 'kelurahan' => $request->kelurahan,
                 'tps' => $request->tps,
-                'hasil_suara_tidak_sah' => $request->hasil_suara_tidak_sah
+                'hasil_suara_tidak_sah' => $request->hasil_suara_tidak_sah,
+                'jumlah_dpt' => $request->jumlah_dpt
             ]);
 
             // gunakan bulk insert

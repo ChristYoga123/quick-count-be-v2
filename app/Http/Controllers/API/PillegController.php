@@ -34,6 +34,7 @@ class PillegController extends Controller
             'hasil_suara_sah.*.caleg_id' => 'required|exists:calegs,id',
             'hasil_suara_sah.*.jumlah_suara' => 'required|integer',
             'hasil_suara_tidak_sah' => 'required',
+            'jumlah_dpt' => 'required|integer',
             'laporan' => 'required|string'
         ]);
 
@@ -44,6 +45,7 @@ class PillegController extends Controller
                 'kelurahan' => $request->kelurahan,
                 'tps' => $request->tps,
                 'hasil_suara_tidak_sah' => $request->hasil_suara_tidak_sah,
+                'jumlah_dpt' => $request->jumlah_dpt
             ]);
 
             $suaraPilleg = [];

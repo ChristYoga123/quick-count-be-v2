@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('kelurahan');
             $table->string('tps');
             $table->integer('hasil_suara_tidak_sah');
+            $table->integer('jumlah_dpt');
             $table->timestamps();
         });
     }
