@@ -20,7 +20,7 @@ class PilparController extends Controller
 
     public function index()
     {
-        $partai = Partai::all();
+        $partai = Partai::with('media')->get();
         return ResponseFormatter::success($partai, 'Data Partai berhasil diambil');
     }
 

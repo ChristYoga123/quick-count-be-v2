@@ -47,6 +47,29 @@ return [
             ]
         ],
         [
+            'title' => 'Laporan',
+            'icon' => 'ti ti-file',
+            'url' => 'admin/laporan/*',
+            'permission' => ['Laporan.web.index'],
+            'sub' => [
+                [
+                    'title' => 'Pemilihan Presiden',
+                    'url' => 'admin/laporan/pilpres',
+                    'permission' => ['Laporan.web.index'],
+                ],
+                [
+                    'title' => 'Pemilihan Partai',
+                    'url' => 'admin/laporan/pilpar',
+                    'permission' => ['Laporan.web.index'],
+                ],
+                [
+                    'title' => 'Pemilihan Legislatif',
+                    'url' => 'admin/laporan/pilleg',
+                    'permission' => ['Laporan.web.index'],
+                ]
+            ]
+        ],
+        [
             'title' => 'Survey',
             'icon' => 'ti ti-pencil',
             'url' => 'admin/survey/*',

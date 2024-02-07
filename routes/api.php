@@ -5,6 +5,7 @@ use App\Http\Controllers\API\DapilController;
 use App\Http\Controllers\API\PillegController;
 use App\Http\Controllers\API\PilparController;
 use App\Http\Controllers\API\PilpresController;
+use App\Http\Controllers\API\SurveyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,11 @@ Route::prefix('pilpar')->group(function () {
 Route::prefix('pilleg')->group(function () {
     Route::get('/{partai}/{dapil}', [PillegController::class, 'index']);
     Route::post('submit-suara', [PillegController::class, 'submitSuara']);
+});
+
+Route::prefix('survey')->group(function () {
+    Route::get('/', [SurveyController::class, 'index']);
+    Route::get('/{surveyTitle}', [SurveyController::class, 'show']);
 });
 
 Route::middleware('api')->prefix('auth')->group(function () {
