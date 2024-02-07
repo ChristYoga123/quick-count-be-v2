@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('survey_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('survey_question_id')->constrained('survey_questions');
+            $table->foreignId('survey_question_id')->constrained();
             $table->longText('answer');
             $table->timestamps();
         });

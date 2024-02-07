@@ -37,17 +37,17 @@ class SurveyController extends Controller
     {
         $request->validate([
             'answers' => 'required|array',
-            'answers.survey_question_id' => 'required|exists:survey_questions,id',
-            'answers.answer' => 'required',
+            'answers.*.survey_question_id' => 'required|exists:survey_questions,id',
+            'answers.*.answer' => 'required'
         ]);
         DB::beginTransaction();
         try {
-            $surveyAnswers = SurveyAnswer::insert($request->answers);
+            $surveyAnswer = SurveyAnswer::insert($request->answers);
             DB::commit();
-            return ResponseFormatter::success($surveyAnswers, 'Jawaban Survey Berhasil Disimpan');
+            return ResponseFormatter::success($surveyAnswer, 'Data Survey Berhasil Disimpan');
         } catch (Exception $e) {
             DB::rollBack();
-            return ResponseFormatter::error($e->getMessage(), $e->getCode());
+            return ResponseFormatter::error($e->getMessage(), 500);
         }
     }
 }
