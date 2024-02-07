@@ -47,6 +47,34 @@ return [
             ]
         ],
         [
+            'title' => 'Survey',
+            'icon' => 'ti ti-pencil',
+            'url' => 'admin/survey/*',
+            'permission' => ['Survey.web.index'],
+            'sub' => [
+                [
+                    'title' => 'Judul Survey',
+                    'url' => 'admin/survey/judul',
+                    'permission' => ['Survey.web.index'],
+                ],
+                [
+                    'title' => 'Kategori Survey',
+                    'url' => 'admin/survey/kategori',
+                    'permission' => ['Survey.web.index'],
+                ],
+                [
+                    'title' => 'Pertanyaan Survey',
+                    'url' => 'admin/survey/pertanyaan',
+                    'permission' => ['Survey.web.index'],
+                ],
+                [
+                    'title' => 'Perkondisian Pertanyaan',
+                    'url' => 'admin/survey/perkondisian',
+                    'permission' => ['Survey.web.index'],
+                ]
+            ]
+        ],
+        [
             'title' => 'Setelan',
             'icon' => 'ti ti-settings',
             'url' => 'admin/settings/*',

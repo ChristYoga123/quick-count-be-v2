@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\Admin\CalegController;
 use App\Http\Controllers\Admin\CapresController;
+use App\Http\Controllers\Admin\ConditionalQuestionController;
 use App\Http\Controllers\Admin\DapilController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PartaiController;
 use App\Http\Controllers\Admin\PetugasController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SurveyCategoryController;
+use App\Http\Controllers\Admin\SurveyQuestionController;
+use App\Http\Controllers\Admin\SurveyTitleController;
 use App\Http\Controllers\Admin\TPSController;
 use App\Models\TPS;
 use Illuminate\Support\Facades\Route;
@@ -38,5 +42,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::resource('partai', PartaiController::class);
         Route::resource('caleg', CalegController::class);
         Route::resource('capres', CapresController::class);
+    });
+
+    Route::prefix('survey')->name('survey.')->group(function () {
+        Route::resource('judul', SurveyTitleController::class);
+        Route::resource('kategori', SurveyCategoryController::class);
+        Route::resource('pertanyaan', SurveyQuestionController::class);
+        Route::resource('perkondisian', ConditionalQuestionController::class);
     });
 });
