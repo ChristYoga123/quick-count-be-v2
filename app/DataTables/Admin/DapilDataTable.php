@@ -39,10 +39,10 @@ class DapilDataTable extends DataTable
                 }
                 return $button;
             })
-            ->addColumn('kecamatan', function ($dapil) {
+            ->addColumn('kelurahan', function ($dapil) {
                 $list = '';
-                foreach (json_decode($dapil->kecamatan) as $kecamatan) {
-                    $list .= '<i class="ti ti-circle"></i> <span class="my-auto">' . $kecamatan . '</span><br>';
+                foreach (json_decode($dapil->kelurahan) as $kelurahan) {
+                    $list .= '<i class="ti ti-circle"></i> <span class="my-auto">' . $kelurahan . '</span><br>';
                 }
                 return $list;
             })
@@ -70,14 +70,7 @@ class DapilDataTable extends DataTable
             //->dom('Bfrtip')
             ->orderBy(0, 'asc')
             ->selectStyleSingle()
-            ->buttons([
-                Button::make('excel'),
-                Button::make('csv'),
-                Button::make('pdf'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            ]);
+            ->buttons([]);
     }
 
     /**
@@ -88,7 +81,7 @@ class DapilDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('index'),
-            Column::computed('kecamatan')
+            Column::computed('kelurahan')
                 ->exportable(true)
                 ->printable(true),
             Column::computed('action')

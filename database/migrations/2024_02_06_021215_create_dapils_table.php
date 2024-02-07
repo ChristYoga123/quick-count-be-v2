@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dapils', function (Blueprint $table) {
             $table->id();
             $table->string('index');
-            $table->string('kecamatan');
+            $table->json('kelurahan');
             $table->timestamps();
         });
     }

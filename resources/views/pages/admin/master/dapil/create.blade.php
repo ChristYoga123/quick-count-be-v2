@@ -18,15 +18,15 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="select2Basic" class="form-label">Kecamatan</label>
+                                <label for="select2Basic" class="form-label">Kelurahan</label>
                                 <select id="select2Multiple"
-                                    class="select2 form-select kelurahan @error('kecamatan') is-invalid @enderror" multiple
-                                    name="kecamatan[]">
-                                    @foreach ($kecamatans as $kecamatan)
-                                        <option value="{{ $kecamatan->subdis_name }}">{{ $kecamatan->subdis_name }}</option>
+                                    class="select2 form-select kelurahan @error('kelurahan') is-invalid @enderror" multiple
+                                    name="kelurahan[]">
+                                    @foreach ($kelurahans as $kelurahan)
+                                        <option value="{{ $kelurahan->subdis_name }}">{{ $kelurahan->subdis_name }}</option>
                                     @endforeach
                                 </select>
-                                @error('kecamatan')
+                                @error('kelurahan')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

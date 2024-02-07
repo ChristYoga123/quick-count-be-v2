@@ -36,7 +36,7 @@ class DapilController extends Controller
         $prajuritKulon = DB::table('districts')->where('dis_name', 'PRAJURITKULON')->first()->dis_id;
         return view('pages.admin.master.dapil.create', [
             'title' => 'Tambah Dapil',
-            'kecamatans' => DB::table('subdistricts')->whereIn('dis_id', [$magerSari, $kranggan, $prajuritKulon])->get()
+            'kelurahans' => DB::table('subdistricts')->whereIn('dis_id', [$magerSari, $kranggan, $prajuritKulon])->get()
         ]);
     }
 
@@ -48,13 +48,13 @@ class DapilController extends Controller
         $this->confirmAuthorization('store');
         $request->validate([
             'index' => 'required|unique:dapils,index',
-            'kecamatan' => 'required|array',
+            'kelurahan' => 'required|array',
         ]);
         DB::beginTransaction();
         try {
             $dapil = Dapil::create([
                 'index' => $request->index,
-                'kecamatan' => json_encode($request->kecamatan)
+                'kelurahan' => json_encode($request->kelurahan)
             ]);
             DB::commit();
             return redirect()->route('admin.master.dapil.index')->with('success', 'Dapil berhasil ditambahkan');
