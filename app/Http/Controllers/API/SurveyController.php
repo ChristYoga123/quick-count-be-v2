@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\SurveyAnswer;
 use App\Models\SurveyQuestion;
 use App\Models\SurveyTitle;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SurveyController extends Controller
 {
@@ -32,5 +35,19 @@ class SurveyController extends Controller
 
     public function answer(Request $request)
     {
+        $request->validate([
+            'answers' => 'required|array',
+            'answers.survey_question_id' => 'required|exists:survey_questions,id',
+            'answers.answer' => 'required',
+        ]);
+        DB::beginTransaction();
+        try {
+            $surveyAnswers = SurveyAnswer::insert($request->answers);
+            DB::commit();
+            return ResponseFormatter::success($surveyAnswers, 'Jawaban Survey Berhasil Disimpan');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return ResponseFormatter::error($e->getMessage(), $e->getCode());
+        }
     }
 }

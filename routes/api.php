@@ -42,6 +42,7 @@ Route::prefix('pilleg')->group(function () {
 Route::prefix('survey')->group(function () {
     Route::get('/', [SurveyController::class, 'index']);
     Route::get('/{surveyTitle}', [SurveyController::class, 'show']);
+    Route::post('answer', [SurveyController::class, 'answer']);
 });
 
 Route::middleware('api')->prefix('auth')->group(function () {
