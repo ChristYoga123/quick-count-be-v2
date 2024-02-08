@@ -53,6 +53,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     });
 
     Route::prefix('laporan')->name('laporan.')->group(function () {
-        Route::resource('pilpres', LaporanPilpresController::class);
+        Route::get('pilpres', [LaporanPilpresController::class, 'index'])->name('pilpres.index');
+        Route::get('pilpres/{dapil}', [LaporanPilpresController::class, 'show'])->name('pilpres.show');
     });
 });

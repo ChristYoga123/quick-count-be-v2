@@ -1,0 +1,28 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-semibold mb-4">{{ $title }}</h4>
+
+        @foreach ($laporanPilpres as $laporan)
+            <div class="card h-100 mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $laporan->name }}</h5>
+                    {{-- <h6 class="card-subtitle text-muted mb-3">Tps: {{ $laporan->LaporanPilpres->Pilpres->tps }} Kelurahan:
+                        {{ $laporan->Pilpres->kelurahan }}</h6> --}}
+                    <ul>
+                        @foreach ($laporan->LaporanPilpres as $data)
+                            <li>
+                                <p class="text-muted">[TPS: {{ $data->Pilpres->tps }} Kelurahan:
+                                    {{ $data->Pilpres->kelurahan }}]: {{ $data->laporan }}
+                                </p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    <!-- / Content -->
+    <div class="content-backdrop fade"></div>
+@endsection

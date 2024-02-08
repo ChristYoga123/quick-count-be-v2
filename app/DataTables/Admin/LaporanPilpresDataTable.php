@@ -2,8 +2,7 @@
 
 namespace App\DataTables\Admin;
 
-use App\Models\LaporanPilpre;
-use App\Models\LaporanPilpres;
+use App\Models\Dapil;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
@@ -25,15 +24,9 @@ class LaporanPilpresDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('nama', function (LaporanPilpres $laporanPilpres) {
-                return $laporanPilpres->User->name;
-            })
-            ->addColumn('dapil', function (LaporanPilpres $laporanPilpres) {
-                return $laporanPilpres->Pilpres->Dapil->index;
-            })
-            ->addColumn('action', function (LaporanPilpres $laporanPilpres) {
+            ->addColumn('action', function (Dapil $dapil) {
                 if (Auth::user()->can($this->permission . '.show')) {
-                    return '<a href="' . route('admin.laporan.pilpres.show', $laporanPilpres->id) . '" class="btn btn-sm"><i class="ti ti-eye"></></a>';
+                    return '<a href="' . route('admin.laporan.pilpres.show', $dapil->id) . '" class="btn btn-sm"><i class="ti ti-eye"></></a>';
                 }
             })
             ->setRowId('id');
@@ -42,9 +35,9 @@ class LaporanPilpresDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(LaporanPilpres $model): QueryBuilder
+    public function query(Dapil $model): QueryBuilder
     {
-        return $model->newQuery()->with(['Pilpres.Dapil', 'User']);
+        return $model->newQuery();
     }
 
     /**
@@ -59,14 +52,7 @@ class LaporanPilpresDataTable extends DataTable
             //->dom('Bfrtip')
             ->orderBy(0, 'asc')
             ->selectStyleSingle()
-            ->buttons([
-                Button::make('excel'),
-                Button::make('csv'),
-                Button::make('pdf'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            ]);
+            ->buttons([]);
     }
 
     /**
@@ -76,12 +62,7 @@ class LaporanPilpresDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::computed('nama')
-                ->exportable(false)
-                ->printable(false),
-            Column::computed('dapil')
-                ->exportable(false)
-                ->printable(false),
+            Column::make('index'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
