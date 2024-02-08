@@ -14,7 +14,8 @@
                         @foreach ($laporan->LaporanPilpar as $data)
                             <li>
                                 <p class="text-muted">[TPS: {{ $data->Pilpar->tps }} Kelurahan:
-                                    {{ $data->Pilpar->kelurahan }}]: {{ $data->laporan }}
+                                    {{ $data->Pilpar->kelurahan }}]: <span
+                                        style="color: black; font-weight: 500">{{ $data->laporan }}</span>
                                 </p>
                             </li>
                         @endforeach
