@@ -13,7 +13,7 @@
                     <ul>
                         @foreach ($laporan->LaporanPilpres as $data)
                             <li>
-                                <p class="text-muted">[TPS: {{ $data->Pilpres->tps }} Kelurahan:
+                                <p class="text-muted">[TPS: {{ $data->Pilpar->tps }} Kelurahan:
                                     {{ $data->Pilpres->kelurahan }}]: {{ $data->laporan }}
                                 </p>
                             </li>

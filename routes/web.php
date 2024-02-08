@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CapresController;
 use App\Http\Controllers\Admin\ConditionalQuestionController;
 use App\Http\Controllers\Admin\DapilController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LaporanPilparController;
 use App\Http\Controllers\Admin\LaporanPilpresController;
 use App\Http\Controllers\Admin\PartaiController;
 use App\Http\Controllers\Admin\PetugasController;
@@ -55,5 +56,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::prefix('laporan')->name('laporan.')->group(function () {
         Route::get('pilpres', [LaporanPilpresController::class, 'index'])->name('pilpres.index');
         Route::get('pilpres/{dapil}', [LaporanPilpresController::class, 'show'])->name('pilpres.show');
+        Route::get('pilpar', [LaporanPilparController::class, 'index'])->name('pilpar');
+        Route::get('pilpar/{dapil}', [LaporanPilparController::class, 'show'])->name('pilpar.show');
     });
 });
