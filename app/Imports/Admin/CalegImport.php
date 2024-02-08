@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-class CalegImport implements ToCollection, WithHeadingRow, WithValidation
+class CalegImport implements ToCollection, WithHeadingRow
 {
     /**
      * @param Collection $collection
@@ -23,13 +23,5 @@ class CalegImport implements ToCollection, WithHeadingRow, WithValidation
                 'partai_id' => $row['partai'],
             ]);
         }
-    }
-
-    public function rules(): array
-    {
-        return [
-            'dapil' => 'exists:dapils,id',
-            'partai' => 'exists:partais,id',
-        ];
     }
 }
