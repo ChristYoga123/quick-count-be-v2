@@ -28,10 +28,8 @@ class CalegImport implements ToCollection, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            'urutan' => 'required',
-            'nama' => 'required',
-            'dapil' => 'required|exists:dapils,id',
-            'partai' => 'required|exists:partais,id',
+            'dapil' => 'exists:dapils,id',
+            'partai' => 'exists:partais,id',
         ];
     }
 }
