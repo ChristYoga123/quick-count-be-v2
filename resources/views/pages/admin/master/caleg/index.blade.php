@@ -9,9 +9,10 @@
 
             @can('TPS.web.create')
                 <div class="mb-4" style="width: 15%">
-                    <a href="{{ route('admin.master.caleg.create') }}" class="btn btn-primary mb-2 text-nowrap">
-                        Tambah {{ $title }}
-                    </a>
+                    <button type="button" class="btn btn-success mb-2 text-nowrap" data-bs-toggle="modal"
+                        data-bs-target="#modalCaleg">
+                        Import Caleg By Excel
+                    </button>
                 </div>
             @endcan
 
@@ -23,6 +24,40 @@
                 </div>
             </div>
             <!--/ SurveyCategory Table -->
+
+            <div class="modal fade" id="modalCaleg" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalCenterTitle">Tambah Data Caleg</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('admin.master.caleg.store') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="nameWithTitle" class="form-label">File Excel <span
+                                                class="text-danger">('.xlsx')</span></label>
+                                        <input type="file" id="nameWithTitle"
+                                            class="form-control @error('excelFile') is-invalid @enderror"
+                                            name="excelFile" />
+                                        @error('excelFile')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                    Batal
+                                </button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- / Content -->
         <div class="content-backdrop fade"></div>
@@ -43,7 +78,7 @@
         <script>
             Swal.fire(
                 'Error!',
-                'Terdapat kesalahan saat menambahkan peran baru. Mohon periksa kembali form yang diisi',
+                `{{ $errors->first() }}`,
                 'error'
             )
         </script>

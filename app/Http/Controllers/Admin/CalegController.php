@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\Admin\CalegDataTable;
 use App\Http\Controllers\Controller;
+use App\Imports\Admin\CalegImport;
 use App\Models\Caleg;
 use App\Models\Dapil;
 use App\Models\Partai;
@@ -11,6 +12,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CalegController extends Controller
 {
@@ -46,24 +48,16 @@ class CalegController extends Controller
     {
         $this->confirmAuthorization('store');
         $request->validate([
-            'no_urut' => 'required|numeric',
-            'nama' => 'required|unique:calegs,nama',
-            'partai' => 'required|exists:partais,id',
-            'dapil' => 'required|exists:dapils,id',
+            'excelFile' => 'required|file|mimes:xlsx,xls'
         ]);
         DB::beginTransaction();
         try {
-            Caleg::create([
-                'no_urut' => $request->no_urut,
-                'nama' => $request->nama,
-                'partai_id' => $request->partai,
-                'dapil_id' => $request->dapil,
-            ]);
+            Excel::import(new CalegImport, $request->file('excelFile'));
             DB::commit();
             return redirect()->route('admin.master.caleg.index')->with('success', 'Caleg berhasil ditambahkan.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->route('admin.master.caleg.index')->with('error', $e->getMessage());
         }
     }
 
