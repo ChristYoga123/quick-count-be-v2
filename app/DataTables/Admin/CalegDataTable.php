@@ -53,7 +53,13 @@ class CalegDataTable extends DataTable
      */
     public function query(Caleg $model): QueryBuilder
     {
-        return $model->newQuery()->with(['Partai', 'Dapil']);
+        $partaiId = $this->request()->get('partai_id');
+        $dapilId = $this->request()->get('dapil_id');
+        $query = $model->newQuery()->with(['Partai', 'Dapil']);
+        if ($partaiId && $dapilId) {
+            $query = $query->where('partai_id', $partaiId)->where('dapil_id', $dapilId);
+        }
+        return $query;
     }
 
     /**

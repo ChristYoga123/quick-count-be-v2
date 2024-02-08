@@ -25,6 +25,8 @@ class CalegController extends Controller
         $this->confirmAuthorization('index');
         return $dataTable->render('pages.admin.master.caleg.index', [
             'title' => 'Caleg DPRD Mojokerto',
+            'partais' => Partai::all(),
+            'dapils' => Dapil::all(),
         ]);
     }
 

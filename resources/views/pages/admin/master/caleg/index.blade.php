@@ -18,7 +18,25 @@
 
             <!-- Permission Table -->
             <div class="card">
+                <div class="mt-3 mr-3" style="width: 100%;">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <select class=" form-select" name="partai_id" style="width: 18%;">
+                            <option value="">Pilih Partai</option>
+                            @foreach ($partais as $partai)
+                                <option value="{{ $partai->id }}">{{ $partai->nama }}</option>
+                            @endforeach
+                        </select>
 
+                        <select class=" form-select" name="dapil_id" style="width: 18%;">
+                            <option value="">Pilih Dapil</option>
+                            @foreach ($dapils as $dapil)
+                                <option value="{{ $dapil->id }}">{{ $dapil->index }}</option>
+                            @endforeach
+                        </select>
+
+                        <button type="button" onclick="changeCaleg()" class="btn btn-primary me-3">Filter</button>
+                    </div>
+                </div>
                 <div class="card-datatable table-responsive">
                     {{ $dataTable->table(['class' => 'datatables table border-top']) }}
                 </div>
@@ -92,6 +110,17 @@
         </script>
     @endif
     <script>
+        const table = $('#caleg-table');
+        table.on('preXhr.dt', function(e, settings, data) {
+            data.partai_id = $('select[name="partai_id"]').val();
+            data.dapil_id = $('select[name="dapil_id"]').val();
+        });
+
+        function changeCaleg() {
+            table.DataTable().ajax.reload();
+            return false;
+        }
+
         function deleteCaleg(id) {
             Swal.fire({
                 title: 'Apakah anda yakin?',
