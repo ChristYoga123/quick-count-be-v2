@@ -64,7 +64,7 @@ return [
                 ],
                 [
                     'title' => 'Pemilihan Legislatif',
-                    'url' => 'admin/laporan/pilleg',
+                    'url' => 'admin/laporan/pileg',
                     'permission' => ['Laporan.web.index'],
                 ]
             ]
