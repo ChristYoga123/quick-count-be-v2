@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-class PetugasImport implements ToCollection, WithHeadingRow, WithValidation
+class PetugasImport implements ToCollection, WithHeadingRow
 {
     /**
      * @param array $row
@@ -31,16 +31,5 @@ class PetugasImport implements ToCollection, WithHeadingRow, WithValidation
                 'phone_number' => $row['telepon'],
             ]);
         }
-    }
-
-    public function rules(): array
-    {
-        return [
-            'nama' => 'required|unique:users,name',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'roles' => 'required',
-            'telepon' => 'required|unique:user_credentials,phone_number',
-        ];
     }
 }
