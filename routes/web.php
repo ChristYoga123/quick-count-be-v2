@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\LaporanPilparController;
 use App\Http\Controllers\Admin\LaporanPilpresController;
 use App\Http\Controllers\Admin\PartaiController;
 use App\Http\Controllers\Admin\PetugasController;
+use App\Http\Controllers\Admin\RealCountPresidenController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SurveyCategoryController;
 use App\Http\Controllers\Admin\SurveyQuestionController;
@@ -61,5 +62,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('pilpar/{dapil}', [LaporanPilparController::class, 'show'])->name('pilpar.show');
         Route::get('pileg', [LaporanPillegController::class, 'index'])->name('pilleg');
         Route::get('pileg/{dapil}', [LaporanPillegController::class, 'show'])->name('pilleg.show');
+    });
+
+    Route::prefix('real-count')->name('real-count.')->group(function () {
+        Route::get('pilpres', [RealCountPresidenController::class, 'index'])->name('pilpres.index');
+        Route::get('pilpres/{dapil}', [RealCountPresidenController::class, 'show'])->name('pilpres.show');
     });
 });

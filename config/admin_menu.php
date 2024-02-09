@@ -70,6 +70,29 @@ return [
             ]
         ],
         [
+            'title' => 'Real Count',
+            'icon' => 'ti ti-chart-bar',
+            'url' => 'admin/real-count/*',
+            'permission' => ['Real Count.web.index'],
+            'sub' => [
+                [
+                    'title' => 'Pemilihan Presiden',
+                    'url' => 'admin/real-count/pilpres',
+                    'permission' => ['Real Count.web.index'],
+                ],
+                [
+                    'title' => 'Pemilihan Partai',
+                    'url' => 'admin/real-count/pilpar',
+                    'permission' => ['Real Count.web.index'],
+                ],
+                [
+                    'title' => 'Pemilihan Legislatif',
+                    'url' => 'admin/real-count/pileg',
+                    'permission' => ['Real Count.web.index'],
+                ]
+            ]
+        ],
+        [
             'title' => 'Survey',
             'icon' => 'ti ti-pencil',
             'url' => 'admin/survey/*',

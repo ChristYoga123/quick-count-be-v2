@@ -33,6 +33,7 @@ class RolePermissionSeeder extends Seeder
 
         $this->createPermissionRoles('Survey', 'web');
         $this->createPermissionRoles('Laporan', 'web');
+        $this->createPermissionRoles('Real Count', 'web');
 
         // Assign Permissions to Roles
         $admin->givePermissionTo(Permission::all());
