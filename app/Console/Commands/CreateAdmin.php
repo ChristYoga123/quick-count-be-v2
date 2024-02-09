@@ -28,7 +28,7 @@ class CreateAdmin extends Command
     {
         $admin = User::create([
             'name' => 'Admin',
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@entryqc.id',
             'password' => bcrypt('password'),
         ]);
         $admin->assignRole('Admin');
