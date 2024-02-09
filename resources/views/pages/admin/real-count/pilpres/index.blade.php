@@ -27,7 +27,7 @@
                         <h5 class="card-title mb-0">Total Suara Pilpres Berdasarkan Dapil</h5>
                     </div>
                 </div>
-                <div class="card-body pt-2">
+                <div class="card-body-dapil pt-2">
                     <div class="d-flex justify-content-center gap-3">
                         <select name="dapil_id" class="form-select select-primary" style="width: 30%">
                             <option value="">Pilih Dapil</option>
@@ -36,6 +36,8 @@
                             @endforeach
                         </select>
                         <button type="button" class="btn btn-primary" onclick="changeSuaraPilpres()">Filter</button>
+                        <button type="button" class="btn btn-danger d-none"
+                            onclick="destroySuaraPilpres()">Destroy</button>
                     </div>
                     <canvas id="pilpres-dapil" class="chartjs" data-height="500"></canvas>
                 </div>
@@ -79,16 +81,40 @@
             $.ajax({
                 url: `/admin/real-count/pilpres/${id}`,
                 method: 'GET',
-                beforeSend: function() {
-                    // destroy canvas
-                    pilpresDapil.destroy();
-                },
                 success: function(data) {
+                    $('select[name=dapil_id]').addClass('d-none');
+                    $('.btn-danger').removeClass('d-none');
+                    $('.btn-primary').addClass('d-none');
                     pilpresDapil.data.labels = data.map(d => d.nama_paslon);
                     pilpresDapil.data.datasets[0].data = data.map(d => d.jumlah_suara);
                     pilpresDapil.update();
                 }
             })
+        }
+
+        function destroySuaraPilpres() {
+            $('#pilpres-dapil').remove();
+            // destroy chart
+            $('.btn-danger').addClass('d-none');
+            $('.btn-primary').removeClass('d-none');
+            $('select[name=dapil_id]').removeClass('d-none');
+            $('.card-body-dapil').empty();
+            $('.card-body-dapil').append(
+                `
+                <div class="d-flex justify-content-center gap-3">
+                        <select name="dapil_id" class="form-select select-primary" style="width: 30%">
+                            <option value="">Pilih Dapil</option>
+                            @foreach ($dapils as $dapil)
+                                <option value="{{ $dapil->id }}">{{ $dapil->index }}</option>
+                            @endforeach
+                        </select>
+                        <button type="button" class="btn btn-primary" onclick="changeSuaraPilpres()">Filter</button>
+                        <button type="button" class="btn btn-danger d-none"
+                            onclick="destroySuaraPilpres()">Destroy</button>
+                    </div>
+                    <canvas id="pilpres-dapil" class="chartjs" data-height="500"></canvas>
+                `
+            );
         }
     </script>
 @endpush
