@@ -8,8 +8,6 @@ use App\Models\SuaraPilpres;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use function Laravel\Prompts\select;
-
 class RealCountPresidenController extends Controller
 {
     public function index(Request $request)
