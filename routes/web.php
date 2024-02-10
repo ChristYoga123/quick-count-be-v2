@@ -45,6 +45,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('kelurahan/{districtName}', [TPSController::class, 'getSubDistricts'])->name('getSubDistricts');
         Route::resource('dapil', DapilController::class);
         Route::resource('petugas', PetugasController::class);
+        Route::post('petugas/single-store', [PetugasController::class, 'singleStore'])->name('petugas.singleStore');
         Route::resource('partai', PartaiController::class);
         Route::resource('caleg', CalegController::class);
         Route::resource('capres', CapresController::class);

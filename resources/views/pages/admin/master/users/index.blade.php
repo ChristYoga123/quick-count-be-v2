@@ -8,11 +8,19 @@
             <h4 class="fw-semibold mb-4">Daftar Petugas</h4>
 
             @can('Petugas.web.create')
-                <div class="mb-4" style="width: 15%">
-                    <button type="button" class="btn btn-success mb-2 text-nowrap" data-bs-toggle="modal"
-                        data-bs-target="#modalUser">
-                        Import Petugas By Excel
-                    </button>
+                <div class="d-flex gap-4">
+                    <div class="mb-4" style="width: 15%">
+                        <button type="button" class="btn btn-success mb-2 text-nowrap" data-bs-toggle="modal"
+                            data-bs-target="#modalUser">
+                            Import Petugas By Excel
+                        </button>
+                    </div>
+
+                    <div class="mb-4" style="width: 15%">
+                        <a href="{{ route('admin.master.petugas.create') }}" class="btn btn-primary mb-2 text-nowrap">
+                            Tambah {{ $title }}
+                        </a>
+                    </div>
                 </div>
             @endcan
 

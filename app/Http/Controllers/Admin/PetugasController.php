@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\Admin\PetugasDataTable;
 use App\Http\Controllers\Controller;
 use App\Imports\Admin\PetugasImport;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\UserCredential;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -32,7 +33,40 @@ class PetugasController extends Controller
      */
     public function create()
     {
-        //
+        $this->confirmAuthorization('create');
+        return view('pages.admin.master.users.create', [
+            'title' => 'Tambah Petugas',
+            'roles' => Role::all()
+        ]);
+    }
+
+    public function singleStore(Request $request)
+    {
+        $this->confirmAuthorization('store');
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
+            'phone_number' => 'required|numeric'
+        ]);
+        DB::beginTransaction();
+        try {
+            $petuga = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+            $petuga->assignRole($request->roles);
+            UserCredential::create([
+                'user_id' => $petuga->id,
+                'phone_number' => $request->phone_number
+            ]);
+            DB::commit();
+            return redirect()->route('admin.master.petugas.index')->with('success', 'Petugas berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.master.petugas.index')->with('error', $e->getMessage());
+        }
     }
 
     /**
