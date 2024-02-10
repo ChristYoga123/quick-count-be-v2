@@ -9,7 +9,7 @@
 
             @can('Petugas.web.create')
                 <div class="d-flex gap-4">
-                    <div class="mb-4" style="width: 15%">
+                    <div class="mb-4 me-3" style="width: 15%">
                         <button type="button" class="btn btn-success mb-2 text-nowrap" data-bs-toggle="modal"
                             data-bs-target="#modalUser">
                             Import Petugas By Excel
