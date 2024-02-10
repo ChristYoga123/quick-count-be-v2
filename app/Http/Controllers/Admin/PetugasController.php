@@ -116,12 +116,30 @@ class PetugasController extends Controller
     {
         $this->confirmAuthorization('update');
         $request->validate([
-            'password' => 'required|min:8|confirmed',
+            'password' => 'nullable|confirmed',
         ]);
         DB::beginTransaction();
         try {
-            $petuga->password = bcrypt($request->password);
-            $petuga->save();
+            if (!$request->password) {
+                $petuga->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                ]);
+                $phone = UserCredential::where('user_id', $petuga->id)->first();
+                $phone->update([
+                    'phone_number' => $request->phone_number
+                ]);
+            } else {
+                $petuga->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => bcrypt($request->password),
+                ]);
+                $phone = UserCredential::where('user_id', $petuga->id)->first();
+                $phone->update([
+                    'phone_number' => $request->phone_number
+                ]);
+            }
             DB::commit();
             return redirect()->route('admin.master.petugas.index')->with('success', 'Petugas berhasil diubah.');
         } catch (\Exception $e) {
