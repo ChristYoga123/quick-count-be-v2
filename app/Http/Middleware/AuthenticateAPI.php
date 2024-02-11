@@ -18,6 +18,6 @@ class AuthenticateAPI
         if (auth('api')->check()) {
             return $next($request);
         }
-        return response()->json(['message' => 'Unauthenticated'], 401);
+        return response()->json(['message' => 'Sesi anda telah berakhir. Silahkan logout'], 401);
     }
 }
