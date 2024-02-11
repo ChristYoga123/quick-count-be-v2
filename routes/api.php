@@ -45,7 +45,7 @@ Route::prefix('survey')->group(function () {
     Route::post('answer', [SurveyController::class, 'answer']);
 });
 
-Route::middleware('api')->prefix('auth')->group(function () {
+Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('me', [AuthController::class, 'me']);

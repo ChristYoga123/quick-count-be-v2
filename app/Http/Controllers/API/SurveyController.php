@@ -14,7 +14,7 @@ class SurveyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('api');
+        $this->middleware('apiAuth');
     }
     public function index()
     {

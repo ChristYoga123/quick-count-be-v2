@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class DapilController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('apiAuth');
+    }
+
     public function index()
     {
         $dapil = Dapil::all();

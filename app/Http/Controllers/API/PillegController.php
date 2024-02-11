@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\DB;
 
 class PillegController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('apiAuth');
+    }
+
     public function index(Partai $partai, Dapil $dapil)
     {
         if (!$partai || !$dapil) {

@@ -8,28 +8,22 @@ use Illuminate\Http\Request;
 class ResponseFormatter extends Controller
 {
     public static $response = [
-        'meta' => [
-            'code' => 200,
-            'status' => 'success',
-            'message' => null
-        ],
-        'data' => null
+        'message' => null,
+        'data' => null,
     ];
 
-    public static function success($data = null, $message = null)
+    public static function success($data, $message = null)
     {
-        self::$response['meta']['message'] = $message;
+        self::$response['message'] = $message;
         self::$response['data'] = $data;
 
-        return response()->json(self::$response, self::$response['meta']['code']);
+        return response()->json(self::$response, 200);
     }
 
-    public static function error($message = null, $code = 400)
+    public static function error($message, $code)
     {
-        self::$response['meta']['status'] = 'error';
-        self::$response['meta']['message'] = $message;
-        self::$response['meta']['code'] = $code;
+        self::$response['message'] = $message;
 
-        return response()->json(self::$response, self::$response['meta']['code']);
+        return response()->json(self::$response, $code);
     }
 }
