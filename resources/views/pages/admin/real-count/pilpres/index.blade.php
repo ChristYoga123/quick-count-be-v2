@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @push('styles')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 @endpush
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">

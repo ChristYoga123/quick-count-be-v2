@@ -17,6 +17,15 @@ class RealCountPresidenController extends Controller
             ->join('capres', 'suara_pilpres.capres_id', '=', 'capres.id')
             ->groupBy('suara_pilpres.capres_id')
             ->get();
+
+        $suaraTidakSah = DB::table('pilpres')
+            ->select(DB::raw('SUM(pilpres.hasil_suara_tidak_sah) as suara_tidak_sah'))
+            ->first();
+        $suaraTidakSahData = [
+            'nama_paslon' => 'Tidak Sah',
+            'jumlah_suara' => $suaraTidakSah->suara_tidak_sah
+        ];
+        $realCountPresiden->push($suaraTidakSahData);
         return view('pages.admin.real-count.pilpres.index')->with([
             'title' => 'Real Count Pemilihan Presiden',
             'dapils' => Dapil::all(),
@@ -34,6 +43,18 @@ class RealCountPresidenController extends Controller
             ->groupBy('suara_pilpres.capres_id')
             ->get();
 
+        $suaraTidakSah = DB::table('pilpres')
+            ->select(DB::raw('SUM(pilpres.hasil_suara_tidak_sah) as suara_tidak_sah'))
+            ->where('pilpres.dapil_id', $dapil->id)
+            ->join('dapils', 'pilpres.dapil_id', '=', 'dapils.id')
+            ->first();
+
+        $suaraTidakSahData = [
+            'nama_paslon' => 'Tidak Sah',
+            'jumlah_suara' => $suaraTidakSah->suara_tidak_sah
+        ];
+
+        $realCountPresiden->push($suaraTidakSahData);
         return response()->json($realCountPresiden);
     }
 }
