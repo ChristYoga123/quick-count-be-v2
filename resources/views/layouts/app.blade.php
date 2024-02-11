@@ -85,10 +85,6 @@
                     </div>
                     <!-- / Content -->
 
-                    <!-- Footer -->
-                    @include('layouts.footer')
-                    <!-- / Footer -->
-
                     <div class="content-backdrop fade"></div>
                 </div>
                 <!-- Content wrapper -->

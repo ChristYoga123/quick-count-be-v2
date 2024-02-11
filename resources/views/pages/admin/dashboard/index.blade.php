@@ -66,8 +66,8 @@
             </div>
             <!--/ Statistics -->
 
-            <div class="col-12 mb-4">
-                <div class="card">
+            <div class="col-12 mb-4 d-flex justify-content-between">
+                <div class="card col-6 me-2">
                     <div class="card-header header-elements">
                         <div>
                             <h5 class="card-title mb-0">Total Suara Pilpres Keseluruhan</h5>
@@ -75,6 +75,18 @@
                     </div>
                     <div class="card-body pt-2">
                         <canvas id="pilpres" class="chartjs" data-height="500"></canvas>
+                    </div>
+                </div>
+                <div class="card col-6">
+                    <div class="card-header header-elements">
+                        <div>
+                            <h5 class="card-title mb-0">Total Suara Pilpres Keseluruhan</h5>
+                        </div>
+                    </div>
+                    <div class="card-body pt-2">
+                        <canvas id="pilpres-pie" class="chartjs"
+                            style="height: 200px;
+                        width: 300px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -86,7 +98,7 @@
                             <h5 class="card-title mb-0">Total Suara Partai Keseluruhan</h5>
                         </div>
                     </div>
-                    <div class="card-body pt-2">
+                    <div class="card-body pt-2 ">
                         <canvas id="pilpar" class="chartjs" data-height="500"></canvas>
                     </div>
                 </div>
@@ -107,8 +119,47 @@
                     data: data.map(d => d.jumlah_suara),
                     borderWidth: 1
                 }]
-            }
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        formatter: (value, context) => {
+                            return value.toLocaleString();
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels],
         });
+
+        const ctx1 = document.getElementById('pilpres-pie').getContext('2d');
+        const data1 = {!! json_encode($realCountPresiden) !!}
+        const pilpresPie = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: data1.map(d => d.nama_paslon),
+                datasets: [{
+                    label: 'Total Suara',
+                    data: data1.map(d => d.jumlah_suara),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        formatter: (value, context) => {
+                            return value.toLocaleString();
+                        }
+                    }
+                },
+                responsive: true,
+            },
+            plugins: [ChartDataLabels],
+        });
+
+        pilpresPie.canvas.parentNode.style.height = '200px';
 
         const ctx2 = document.getElementById('pilpar').getContext('2d');
         const data2 = {!! json_encode($realCountPartai) !!}
@@ -121,7 +172,19 @@
                     data: data2.map(d => d.jumlah_suara),
                     borderWidth: 1
                 }]
-            }
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        formatter: (value, context) => {
+                            return value.toLocaleString();
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels],
         });
     </script>
 @endpush
