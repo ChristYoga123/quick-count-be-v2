@@ -6,6 +6,7 @@ use App\Http\Controllers\API\PillegController;
 use App\Http\Controllers\API\PilparController;
 use App\Http\Controllers\API\PilpresController;
 use App\Http\Controllers\API\SurveyController;
+use App\Http\Controllers\API\VersionCheckerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('version')->group(function () {
+    Route::post('check', [VersionCheckerController::class, 'check']);
 });
 
 Route::prefix('pilpres')->group(function () {
