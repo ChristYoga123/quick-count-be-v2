@@ -36,6 +36,21 @@ class PilpresController extends Controller
             'hasil_suara_tidak_sah' => 'required|integer',
             'jumlah_dpt' => 'required|integer',
             'laporan' => 'required|string'
+        ], [
+            'dapil_id.required' => 'Dapil tidak boleh kosong',
+            'dapil_id.exists' => 'Dapil tidak ditemukan',
+            'kelurahan.required' => 'Kelurahan tidak boleh kosong',
+            'tps.required' => 'TPS tidak boleh kosong',
+            'hasil_suara_sah.required' => 'Hasil suara sah tidak boleh kosong',
+            'hasil_suara_sah.array' => 'Hasil suara sah harus berupa array',
+            'hasil_suara_sah.capres_id.integer' => 'Capres id harus berupa angka',
+            'hasil_suara_sah.capres_id.exists' => 'Capres id tidak ditemukan',
+            'hasil_suara_sah.jumlah_suara.integer' => 'Jumlah suara harus berupa angka',
+            'hasil_suara_tidak_sah.required' => 'Hasil suara tidak sah tidak boleh kosong',
+            'jumlah_dpt.required' => 'Jumlah DPT tidak boleh kosong',
+            'jumlah_dpt.integer' => 'Jumlah DPT harus berupa angka',
+            'laporan.required' => 'Laporan tidak boleh kosong',
+            'laporan.string' => 'Laporan harus berupa string'
         ]);
 
         DB::beginTransaction();

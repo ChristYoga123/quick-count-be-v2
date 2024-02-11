@@ -39,6 +39,12 @@ class SurveyController extends Controller
             'answers' => 'required|array',
             'answers.*.survey_question_id' => 'required|exists:survey_questions,id',
             'answers.*.answer' => 'nullable',
+        ], [
+            'answers.required' => 'Jawaban tidak boleh kosong',
+            'answers.array' => 'Jawaban harus berupa array',
+            'answers.*.survey_question_id.required' => 'Survey Question ID tidak boleh kosong',
+            'answers.*.survey_question_id.exists' => 'Survey Question ID tidak ditemukan',
+            'answers.*.answer.nullable' => 'Jawaban harus berupa string',
         ]);
         DB::beginTransaction();
         try {

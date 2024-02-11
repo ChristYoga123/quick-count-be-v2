@@ -28,7 +28,7 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!$token = auth('api')->attempt($credentials)) {
-            return ResponseFormatter::error('Unauthorized', 401);
+            return ResponseFormatter::error('Email atau password salah', 401);
         }
 
         return ResponseFormatter::success($this->respondWithToken($token), 'Login Sukses');
