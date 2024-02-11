@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
@@ -43,6 +44,11 @@ class AuthController extends Controller
     {
         $user = auth('api')->user();
         $user['telepon'] = DB::table('user_credentials')->where('user_id', $user->id)->first()->phone_number ?? null;
+        $user['role'] = DB::table('roles')
+            ->select('roles.name')
+            ->join('model_has_roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->where('model_has_roles.model_id', $user->id)
+            ->first()->name ?? null;
         return ResponseFormatter::success($user, 'Data User Ditemukan');
     }
 
