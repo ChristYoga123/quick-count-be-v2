@@ -55,8 +55,8 @@
                                         <i class="ti ti-building ti-sm"></i>
                                     </div>
                                     <div class="card-info">
-                                        <h5 class="mb-0">{{ $dapil }}</h5>
-                                        <small>Dapil</small>
+                                        <h5 class="mb-0">{{ $total }}</h5>
+                                        <small>Total Suara</small>
                                     </div>
                                 </div>
                             </div>
@@ -116,8 +116,9 @@
                 labels: data.map(d => d.nama_paslon),
                 datasets: [{
                     label: 'Total Suara',
-                    data: data.map(d => d.jumlah_suara),
-                    borderWidth: 1
+                    data: data.map(d => d.total),
+                    borderWidth: 1,
+                    backgroundColor: data.map(d => d.color)
                 }]
             },
             options: {
@@ -141,25 +142,29 @@
             data: {
                 labels: data1.map(d => d.nama_paslon),
                 datasets: [{
-                    label: 'Total Suara',
-                    data: data1.map(d => d.jumlah_suara),
-                    borderWidth: 1
+                    label: 'Persentase Suara',
+                    data: data1.map(d => d.persen),
+                    borderWidth: 1,
+                    backgroundColor: data1.map(d => d.color)
                 }]
             },
             options: {
                 plugins: {
                     datalabels: {
                         formatter: (value, context) => {
-                            return value.toLocaleString();
-                        }
+                            // add % symbol to the end of value
+                            return value + ' %';
+                        },
+                        color: '#fff',
                     }
                 },
                 responsive: true,
             },
             plugins: [ChartDataLabels],
         });
-
-        pilpresPie.canvas.parentNode.style.height = '200px';
+        pilpresPie.options.responsive = true;
+        pilpresPie.canvas.style.height = '300px';
+        pilpresPie.canvas.style.width = '300px';
 
         const ctx2 = document.getElementById('pilpar').getContext('2d');
         const data2 = {!! json_encode($realCountPartai) !!}
@@ -169,8 +174,8 @@
                 labels: data2.map(d => d.nama),
                 datasets: [{
                     label: 'Total Suara',
-                    data: data2.map(d => d.jumlah_suara),
-                    borderWidth: 1
+                    data: data2.map(d => d.total),
+                    borderWidth: 1,
                 }]
             },
             options: {
