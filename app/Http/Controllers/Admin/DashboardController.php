@@ -18,6 +18,7 @@ class DashboardController extends Controller
         $capres = Capres::count();
         $partai = Partai::count();
         $caleg = Caleg::count();
+        $dapil = Dapil::count();
 
         /* Chart Data */
         // Presiden
@@ -50,7 +51,7 @@ class DashboardController extends Controller
             'caleg' => $caleg,
             'partai' => $partai,
             'capres' => $capres,
-            'total' => $total,
+            'dapil' => $dapil,
             'realCountPresiden' => $realCountPresiden,
             'realCountPartai' => $realCountPartai,
         ]);

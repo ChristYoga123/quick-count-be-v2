@@ -55,8 +55,8 @@
                                         <i class="ti ti-building ti-sm"></i>
                                     </div>
                                     <div class="card-info">
-                                        <h5 class="mb-0">{{ $total }}</h5>
-                                        <small>Total Suara</small>
+                                        <h5 class="mb-0">{{ $dapil }}</h5>
+                                        <small>Dapil</small>
                                     </div>
                                 </div>
                             </div>
