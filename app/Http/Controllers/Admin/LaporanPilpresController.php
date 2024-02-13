@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\Admin\LaporanPilpresDataTable as AdminLaporanPilpresDataTable;
 use App\DataTables\LaporanPilpresDataTable;
+use App\Exports\Admin\LaporanPilpresExport;
 use App\Http\Controllers\Controller;
 use App\Models\Dapil;
 use App\Models\LaporanPilpres;
@@ -12,6 +13,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanPilpresController extends Controller
 {
@@ -37,6 +39,12 @@ class LaporanPilpresController extends Controller
             'title' => 'Detail Laporan Pemilihan Presiden Dapil ' . $dapil->index,
             'laporanPilpres' => $laporanPilpres
         ]);
+    }
+
+    public function export(Dapil $dapil)
+    {
+        $this->confirmAuthorization('show');
+        return Excel::download(new LaporanPilpresExport($dapil), 'laporan-pilpres-dapil-' . $dapil->index . '.xlsx');
     }
 
     private function confirmAuthorization($operation)

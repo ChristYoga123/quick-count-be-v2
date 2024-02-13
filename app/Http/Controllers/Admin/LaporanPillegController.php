@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DataTables\Admin\LaporanPillegDataTable;
+use App\Exports\Admin\LaporanPillegExport;
 use App\Http\Controllers\Controller;
 use App\Models\Dapil;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanPillegController extends Controller
 {
@@ -35,6 +37,12 @@ class LaporanPillegController extends Controller
             'title' => 'Laporan Pemilihan Legislatif',
             'laporanPillegs' => $laporanPilleg
         ]);
+    }
+
+    public function export(Dapil $dapil)
+    {
+        $this->confirmAuthorization('show');
+        return Excel::download(new LaporanPillegExport($dapil), 'laporan-legislatif-dapil-' . $dapil->index . '.xlsx');
     }
 
     private function confirmAuthorization($operation)

@@ -25,9 +25,12 @@ class LaporanPilpresDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function (Dapil $dapil) {
+                $button = '';
                 if (Auth::user()->can($this->permission . '.show')) {
-                    return '<a href="' . route('admin.laporan.pilpres.show', $dapil->id) . '" class="btn btn-sm"><i class="ti ti-eye"></></a>';
+                    $button .= '<a href="' . route('admin.laporan.pilpres.export', $dapil->id) . '" class="btn btn-sm"><i class="ti ti-file-spreadsheet"></i></a>';
+                    $button .= '<a href="' . route('admin.laporan.pilpres.show', $dapil->id) . '" class="btn btn-sm"><i class="ti ti-eye"></></a>';
                 }
+                return $button;
             })
             ->setRowId('id');
     }

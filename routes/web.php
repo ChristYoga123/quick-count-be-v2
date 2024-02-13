@@ -60,10 +60,13 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::prefix('laporan')->name('laporan.')->group(function () {
         Route::get('pilpres', [LaporanPilpresController::class, 'index'])->name('pilpres.index');
         Route::get('pilpres/{dapil}', [LaporanPilpresController::class, 'show'])->name('pilpres.show');
+        Route::get('pilpres/export/{dapil}', [LaporanPilpresController::class, 'export'])->name('pilpres.export');
         Route::get('pilpar', [LaporanPilparController::class, 'index'])->name('pilpar');
         Route::get('pilpar/{dapil}', [LaporanPilparController::class, 'show'])->name('pilpar.show');
+        Route::get('pilpar/export/{dapil}', [LaporanPilparController::class, 'export'])->name('pilpar.export');
         Route::get('pileg', [LaporanPillegController::class, 'index'])->name('pilleg');
         Route::get('pileg/{dapil}', [LaporanPillegController::class, 'show'])->name('pilleg.show');
+        Route::get('pileg/export/{dapil}', [LaporanPillegController::class, 'export'])->name('pilleg.export');
     });
 
     Route::prefix('real-count')->name('real-count.')->group(function () {
