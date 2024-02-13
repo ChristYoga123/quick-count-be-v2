@@ -61,9 +61,23 @@
                     label: 'Total Suara',
                     data: data.map(d => d.jumlah_suara),
                     borderWidth: 1,
+                    backgroundColor: data.map(d => d.color)
                 }]
             },
             plugins: [ChartDataLabels],
+            options: {
+                plugins: {
+                    datalabels: {
+                        color: '#fff',
+                        anchor: 'end',
+                        align: 'start',
+                        offset: 4,
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                }
+            }
         });
 
         function changeSuaraPilpres() {
@@ -80,6 +94,19 @@
                     }]
                 },
                 plugins: [ChartDataLabels],
+                options: {
+                    plugins: {
+                        datalabels: {
+                            color: '#fff',
+                            anchor: 'end',
+                            align: 'start',
+                            offset: 4,
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
             });
             $.ajax({
                 url: `/admin/real-count/pilpres/${id}`,

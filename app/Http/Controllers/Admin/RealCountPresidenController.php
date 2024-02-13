@@ -23,8 +23,13 @@ class RealCountPresidenController extends Controller
             ->first();
         $suaraTidakSahData = [
             'nama_paslon' => 'Tidak Sah',
-            'jumlah_suara' => $suaraTidakSah->suara_tidak_sah
+            'jumlah_suara' => $suaraTidakSah->suara_tidak_sah,
+            'color' => 'gray'
         ];
+        $color = ['#00cc00', '#6699ff', 'red'];
+        foreach ($realCountPresiden as $key => $value) {
+            $value->color = $color[$key];
+        }
         $realCountPresiden->push($suaraTidakSahData);
         return view('pages.admin.real-count.pilpres.index')->with([
             'title' => 'Real Count Pemilihan Presiden',
@@ -54,6 +59,11 @@ class RealCountPresidenController extends Controller
             'jumlah_suara' => $suaraTidakSah->suara_tidak_sah,
             'color' => 'gray'
         ];
+
+        $color = ['#00cc00', '#6699ff', 'red'];
+        foreach ($realCountPresiden as $key => $value) {
+            $value->color = $color[$key];
+        }
         $realCountPresiden->push($suaraTidakSahData);
         return response()->json($realCountPresiden);
     }
