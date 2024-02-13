@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\AppToken;
 use App\Models\Role;
 use Illuminate\Support\Facades\DB;
 
@@ -31,7 +32,13 @@ class AuthController extends Controller
         if (!$token = auth('api')->attempt($credentials)) {
             return ResponseFormatter::error('Email atau password salah', 401);
         }
-
+        // Delete all token from user
+        AppToken::where('user_id', auth('api')->user()->id)->delete();
+        // Create new token
+        AppToken::create([
+            'user_id' => auth('api')->user()->id,
+            'token' => $token
+        ]);
         return ResponseFormatter::success($this->respondWithToken($token), 'Login Sukses');
     }
 

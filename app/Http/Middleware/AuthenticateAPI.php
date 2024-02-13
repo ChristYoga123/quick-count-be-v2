@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\AppToken;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +17,12 @@ class AuthenticateAPI
     public function handle(Request $request, Closure $next): Response
     {
         if (auth('api')->check()) {
-            return $next($request);
+            $token = $request->bearerToken();
+            $userToken = AppToken::where('token', $token)->first();
+            if ($userToken) {
+                return $next($request);
+            }
+            return response()->json(['message' => 'Sesi anda telah berakhir. Silahkan logout'], 401);
         }
         return response()->json(['message' => 'Sesi anda telah berakhir. Silahkan logout'], 401);
     }
