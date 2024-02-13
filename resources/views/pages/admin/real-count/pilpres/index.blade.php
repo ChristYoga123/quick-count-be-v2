@@ -62,7 +62,8 @@
                     data: data.map(d => d.jumlah_suara),
                     borderWidth: 1
                 }]
-            }
+            },
+            plugins: [ChartDataLabels],
         });
 
         function changeSuaraPilpres() {
@@ -77,7 +78,8 @@
                         data: [],
                         borderWidth: 1
                     }]
-                }
+                },
+                plugins: [ChartDataLabels],
             });
             $.ajax({
                 url: `/admin/real-count/pilpres/${id}`,

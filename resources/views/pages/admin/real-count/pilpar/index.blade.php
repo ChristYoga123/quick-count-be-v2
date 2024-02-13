@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @push('styles')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 @endpush
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -60,7 +61,8 @@
                     data: data.map(d => d.jumlah_suara),
                     borderWidth: 1
                 }]
-            }
+            },
+            plugins: [ChartDataLabels],
         });
 
         function changeSuaraPilpar() {
@@ -75,7 +77,8 @@
                         data: [],
                         borderWidth: 1
                     }]
-                }
+                },
+                plugins: [ChartDataLabels],
             });
             $.ajax({
                 url: `/admin/real-count/pilpar/${id}`,
