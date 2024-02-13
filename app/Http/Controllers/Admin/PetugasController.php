@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DataTables\Admin\PetugasDataTable;
+use App\Exports\Admin\PetugasExport;
 use App\Http\Controllers\Controller;
 use App\Imports\Admin\PetugasImport;
 use App\Models\Role;
@@ -87,6 +88,11 @@ class PetugasController extends Controller
             DB::rollBack();
             return redirect()->route('admin.master.petugas.index')->with('error', $e->getMessage());
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new PetugasExport(), 'petugas.xlsx');
     }
 
     /**

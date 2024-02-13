@@ -16,6 +16,12 @@
                         </button>
                     </div>
 
+                    <div class="mb-4 me-5" style="width: 15%">
+                        <a href="{{ route('petugas.export') }}" class="btn btn-light">
+                            Export Petugas
+                        </a>
+                    </div>
+
                     <div class="mb-4" style="width: 15%">
                         <a href="{{ route('admin.master.petugas.create') }}" class="btn btn-primary mb-2 text-nowrap">
                             Tambah {{ $title }}
