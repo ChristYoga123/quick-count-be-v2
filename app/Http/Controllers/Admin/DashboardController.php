@@ -36,18 +36,20 @@ class DashboardController extends Controller
         $suaraTidakSah = DB::table('pilpres')->sum('hasil_suara_tidak_sah');
         $total = $suaraSah + $suaraTidakSah;
 
-        foreach ($realCountPresiden as $key => $value) {
-            $value->persen = (string) (round(($value->total / $total) * 100, 2));
+        if ($suaraTidakSah) {
+            foreach ($realCountPresiden as $key => $value) {
+                $value->persen = (string) (round(($value->total / $total) * 100, 2));
+            }
+
+            $suaraTidakSahPresiden = [
+                'nama_paslon' => 'Tidak Sah',
+                'total' => $suaraTidakSah,
+                'color' => 'gray',
+                'persen' => (string) (round(($suaraTidakSah / $total) * 100, 2)),
+            ];
+
+            $realCountPresiden->push($suaraTidakSahPresiden);
         }
-
-        $suaraTidakSahPresiden = [
-            'nama_paslon' => 'Tidak Sah',
-            'total' => $suaraTidakSah,
-            'color' => 'gray',
-            'persen' => (string) (round(($suaraTidakSah / $total) * 100, 2)),
-        ];
-
-        $realCountPresiden->push($suaraTidakSahPresiden);
 
         // Partai
         $realCountPartai = DB::table('suara_pilpars')
