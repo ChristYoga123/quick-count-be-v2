@@ -50,6 +50,7 @@ class RealCountPartaiController extends Controller
             'jumlah_suara' => $suaraTidakSah->suara_tidak_sah
         ];
         $realCountPartai->push($suaraTidahSahData);
+        dd($realCountPartai);
         return response()->json($realCountPartai);
     }
 }
