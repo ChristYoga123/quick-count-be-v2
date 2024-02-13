@@ -40,12 +40,29 @@ class DashboardController extends Controller
             $value->persen = (string) (round(($value->total / $total) * 100, 2));
         }
 
+        $suaraTidakSahPresiden = [
+            'nama_paslon' => 'Tidak Sah',
+            'total' => $suaraTidakSah,
+            'color' => 'gray',
+            'persen' => (string) (round(($suaraTidakSah / $total) * 100, 2)),
+        ];
+
+        $realCountPresiden->push($suaraTidakSahPresiden);
+
         // Partai
         $realCountPartai = DB::table('suara_pilpars')
             ->select('partais.nama', DB::raw('SUM(suara_pilpars.jumlah_suara) as total'))
             ->join('partais', 'suara_pilpars.partai_id', '=', 'partais.id')
             ->groupBy('suara_pilpars.partai_id')
             ->get();
+
+        $suaraTidakSahPartai = DB::table('pilpars')->sum('hasil_suara_tidak_sah');
+        $suaraTidakSahPartai = [
+            'nama' => 'Tidak Sah',
+            'total' => $suaraTidakSahPartai,
+        ];
+        $realCountPartai->push($suaraTidakSahPartai);
+
         return view('pages.admin.dashboard.index', [
             'title' => 'Dashboard',
             'caleg' => $caleg,
