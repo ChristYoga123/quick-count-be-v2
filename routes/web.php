@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', '/admin/dashboard');
 Route::get('petugas/export', [PetugasController::class, 'export'])->name('petugas.export');
 require __DIR__ . '/auth.php';
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
