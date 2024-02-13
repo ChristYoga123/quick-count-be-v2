@@ -59,8 +59,22 @@
                 datasets: [{
                     label: 'Total Suara',
                     data: data.map(d => d.jumlah_suara),
-                    borderWidth: 1
+                    borderWidth: 1,
+                    backgroundColor: data.map(d => d.color)
                 }]
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        color: '#fff',
+                        anchor: 'end',
+                        align: 'start',
+                        offset: 4,
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                }
             },
             plugins: [ChartDataLabels],
         });
@@ -75,8 +89,21 @@
                     datasets: [{
                         label: 'Total Suara',
                         data: [],
-                        borderWidth: 1
+                        borderWidth: 1,
                     }]
+                },
+                options: {
+                    plugins: {
+                        datalabels: {
+                            color: '#fff',
+                            anchor: 'end',
+                            align: 'start',
+                            offset: 4,
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
                 },
                 plugins: [ChartDataLabels],
             });
@@ -89,6 +116,7 @@
                     $('.btn-primary').addClass('d-none');
                     pilPar.data.labels = data.map(d => d.nama);
                     pilPar.data.datasets[0].data = data.map(d => d.jumlah_suara);
+                    pilPar.data.datasets[0].backgroundColor = data.map(d => d.color);
                     pilPar.update();
                 }
             })

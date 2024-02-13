@@ -60,7 +60,7 @@
                 datasets: [{
                     label: 'Total Suara',
                     data: data.map(d => d.jumlah_suara),
-                    borderWidth: 1
+                    borderWidth: 1,
                 }]
             },
             plugins: [ChartDataLabels],
@@ -90,6 +90,7 @@
                     $('.btn-primary').addClass('d-none');
                     pilpresDapil.data.labels = data.map(d => d.nama_paslon);
                     pilpresDapil.data.datasets[0].data = data.map(d => d.jumlah_suara);
+                    pilpresDapil.data.datasets[0].backgroundColor = data.map(d => d.color);
                     pilpresDapil.update();
                 }
             })

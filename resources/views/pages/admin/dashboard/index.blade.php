@@ -176,6 +176,7 @@
                     label: 'Total Suara',
                     data: data2.map(d => d.total),
                     borderWidth: 1,
+                    backgroundColor: data2.map(d => d.color)
                 }]
             },
             options: {

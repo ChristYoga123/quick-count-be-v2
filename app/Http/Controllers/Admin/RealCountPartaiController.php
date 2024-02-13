@@ -21,8 +21,15 @@ class RealCountPartaiController extends Controller
             ->first();
         $suaraTidahSahData = [
             'nama' => 'Tidak Sah',
-            'jumlah_suara' => $suaraTidakSah->suara_tidak_sah
+            'jumlah_suara' => $suaraTidakSah->suara_tidak_sah,
+            'color' => 'gray'
         ];
+        $colorPartai = [
+            '#017042', '#EC1F25', '#DB1F26', '#FACD0A', '#1E1C58', '#F68B54', '#0FBDEE', '#EF4323', '#ED1C24', '#FFCC08', 'blue', '#005CA8', '#0F6741', '#A0D0F0', '#E94031', '#233775', '#436F42', '#040708'
+        ];
+        foreach ($realCountPartai as $key => $value) {
+            $value->color = $colorPartai[$key];
+        }
         $realCountPartai->push($suaraTidahSahData);
         return view('pages.admin.real-count.pilpar.index')->with([
             'title' => 'Real Count Pemilihan Partai',
@@ -47,8 +54,15 @@ class RealCountPartaiController extends Controller
             ->first();
         $suaraTidahSahData = [
             'nama' => 'Tidak Sah',
-            'jumlah_suara' => $suaraTidakSah->suara_tidak_sah
+            'jumlah_suara' => $suaraTidakSah->suara_tidak_sah,
+            'color' => 'gray'
         ];
+        $colorPartai = [
+            '#017042', '#EC1F25', '#DB1F26', '#FACD0A', '#1E1C58', '#F68B54', '#0FBDEE', '#EF4323', '#ED1C24', '#FFCC08', 'blue', '#005CA8', '#0F6741', '#A0D0F0', '#E94031', '#233775', '#436F42', '#040708'
+        ];
+        foreach ($realCountPartai as $key => $value) {
+            $value->color = $colorPartai[$key];
+        }
         $realCountPartai->push($suaraTidahSahData);
         return response()->json($realCountPartai);
     }

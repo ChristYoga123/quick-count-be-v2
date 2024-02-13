@@ -51,9 +51,9 @@ class RealCountPresidenController extends Controller
 
         $suaraTidakSahData = [
             'nama_paslon' => 'Tidak Sah',
-            'jumlah_suara' => $suaraTidakSah->suara_tidak_sah
+            'jumlah_suara' => $suaraTidakSah->suara_tidak_sah,
+            'color' => 'gray'
         ];
-
         $realCountPresiden->push($suaraTidakSahData);
         return response()->json($realCountPresiden);
     }
