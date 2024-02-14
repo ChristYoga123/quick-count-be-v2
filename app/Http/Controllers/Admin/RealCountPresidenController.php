@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\Admin\RealCountPresidenExport;
 use App\Http\Controllers\Controller;
 use App\Models\Dapil;
 use App\Models\SuaraPilpres;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RealCountPresidenController extends Controller
 {
@@ -66,5 +68,10 @@ class RealCountPresidenController extends Controller
         }
         $realCountPresiden->push($suaraTidakSahData);
         return response()->json($realCountPresiden);
+    }
+
+    public function export()
+    {
+        return Excel::download(new RealCountPresidenExport(), 'real-count-pilpres.xlsx');
     }
 }

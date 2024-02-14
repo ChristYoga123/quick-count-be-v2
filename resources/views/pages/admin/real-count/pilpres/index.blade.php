@@ -5,8 +5,11 @@
 @endpush
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-semibold mb-4">{{ $title }}</h4>
-
+        <h4 class="fw-semibold mb-2">{{ $title }}</h4>
+        <div class="mb-4 d-flex justify-content-start" style="width: 100%">
+            <a href="{{ route('real-count.pilpres.export') }}" class="btn btn-success">Export Laporan Real Count
+                Presiden</a>
+        </div>
         {{-- Charts --}}
         <div class="col-12 mb-4">
             <div class="card">
