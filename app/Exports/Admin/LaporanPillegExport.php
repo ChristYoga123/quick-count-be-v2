@@ -2,12 +2,15 @@
 
 namespace App\Exports\Admin;
 
+use App\Exports\Admin\Sheets\LaporanPillegSheets;
 use App\Models\Dapil;
+use App\Models\Partai;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class LaporanPillegExport implements FromCollection, WithHeadings
+class LaporanPillegExport implements WithMultipleSheets
 {
     public Dapil $dapil;
 
@@ -15,25 +18,17 @@ class LaporanPillegExport implements FromCollection, WithHeadings
     {
         $this->dapil = $dapil;
     }
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function collection()
-    {
-        return DB::table('laporan_pillegs')
-            ->select('laporan_pillegs.id', 'users.name', 'laporan_pillegs.laporan')
-            ->join('users', 'laporan_pillegs.user_id', '=', 'users.id')
-            ->join('pillegs', 'laporan_pillegs.pilleg_id', '=', 'pillegs.id')
-            ->where('pillegs.dapil_id', $this->dapil->id)
-            ->get();
-    }
 
-    public function headings(): array
+    public function sheets(): array
     {
-        return [
-            'ID',
-            'Nama',
-            'Laporan'
-        ];
+        $sheets = [];
+
+        $partais = Partai::all();
+
+        foreach ($partais as $partai) {
+            $sheets[] = new LaporanPillegSheets($this->dapil, $partai);
+        }
+
+        return $sheets;
     }
 }
