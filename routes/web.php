@@ -79,6 +79,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('pilpar', [RealCountPartaiController::class, 'index'])->name('pilpar.index');
         Route::get('pilpar/{dapil}', [RealCountPartaiController::class, 'show'])->name('pilpar.show');
         Route::get('pileg', [RealCountPillegController::class, 'index'])->name('pileg');
-        Route::get('pileg/{partai}', [RealCountPillegController::class, 'show'])->name('pileg.show');
+        Route::get('pileg/{partai}/{dapil}', [RealCountPillegController::class, 'show'])->name('pileg.show');
     });
 });

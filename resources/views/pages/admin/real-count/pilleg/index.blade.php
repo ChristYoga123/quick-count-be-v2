@@ -22,6 +22,12 @@
                                 <option value="{{ $partai->id }}">{{ $partai->nama }}</option>
                             @endforeach
                         </select>
+                        <select name="dapil_id" class="form-select select-primary" style="width: 30%">
+                            <option value="">Pilih Dapil</option>
+                            @foreach ($dapils as $dapil)
+                                <option value="{{ $dapil->id }}">{{ $dapil->index }}</option>
+                            @endforeach
+                        </select>
                         <button type="button" class="btn btn-primary" onclick="changeSuaraLegislatif()">Filter</button>
                         <button type="button" class="btn btn-danger d-none"
                             onclick="destroySuaraLegislatif()">Destroy</button>
@@ -39,7 +45,8 @@
 @push('scripts')
     <script>
         function changeSuaraLegislatif() {
-            const id = $('select[name=partai_id]').val();
+            const idPartai = $('select[name=partai_id]').val();
+            const idDapil = $('select[name=dapil_id]').val();
             const ctx = document.getElementById('pilleg').getContext('2d');
             const pilleg = new Chart(ctx, {
                 type: 'bar',
@@ -54,10 +61,11 @@
                 plugins: [ChartDataLabels],
             });
             $.ajax({
-                url: `/admin/real-count/pileg/${id}`,
+                url: `/admin/real-count/pileg/${idPartai}/${idDapil}`,
                 method: 'GET',
                 success: function(data) {
                     $('select[name=partai_id]').addClass('d-none');
+                    $('select[name=dapil_id]').addClass('d-none');
                     $('.btn-danger').removeClass('d-none');
                     $('.btn-primary').addClass('d-none');
                     pilleg.data.labels = data.map(d => d.nama);
@@ -73,6 +81,7 @@
             $('.btn-danger').addClass('d-none');
             $('.btn-primary').removeClass('d-none');
             $('select[name=partai_id]').removeClass('d-none');
+            $('select[name=dapil_id]').removeClass('d-none');
             $('.card-body-pilleg').empty();
             $('.card-body-pilleg').append(
                 `
@@ -81,6 +90,12 @@
                             <option value="">Pilih Partai</option>
                             @foreach ($partais as $partai)
                                 <option value="{{ $partai->id }}">{{ $partai->nama }}</option>
+                            @endforeach
+                        </select>
+                        <select name="dapil_id" class="form-select select-primary" style="width: 30%">
+                            <option value="">Pilih Dapil</option>
+                            @foreach ($dapils as $dapil)
+                                <option value="{{ $dapil->id }}">{{ $dapil->index }}</option>
                             @endforeach
                         </select>
                         <button type="button" class="btn btn-primary" onclick="changeSuaraLegislatif()">Filter</button>
