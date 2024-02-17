@@ -16,7 +16,7 @@
                         <!-- /Logo -->
                         <div class="text-center">
                             <h4 class="mb-1 pt-2">Selamat datang di Entry-RC 👋</h4>
-                            <p class="mb-4">Dashboard admin untuk manajerial data real count pemilu {{ date('Y') }}
+                            <p class="mb-4">Dashboard Admin Data Real Count Pemilu {{ date('Y') }}
                             </p>
                         </div>
 
@@ -32,6 +32,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3 form-password-toggle">
+                                <label for="password" class="form-label">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input type="password" id="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
@@ -44,7 +45,20 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
+                                <button class="btn d-grid text-white w-100" type="submit"
+                                    style="background-color: #f04b4c">Masuk</button>
+                            </div>
+
+                            <div class="mb-3">
+                                <a href="https://client.entryqc.id" class="btn  d-grid text-white w-100"
+                                    style="background-color: #213159">Isi Data Melalui
+                                    Web</a>
+                            </div>
+
+                            <div class="mb-3">
+                                <a href="https://drive.google.com/file/d/1GCDMmExJzOF4UN58iqsCcNiQdecqzFEP/view?usp=sharing"
+                                    class="btn  d-grid text-white w-100" style="background-color: #213159">Unduh
+                                    Aplikasi</a>
                             </div>
                         </form>
                     </div>
