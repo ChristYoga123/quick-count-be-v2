@@ -87,11 +87,12 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $id)
     {
+        $role = Role::findById($id);
         $this->confirmAuthorization('update');
         $request->validate([
-            "editName" => "required|string|unique:roles,name," . $role->id,
+            "editName" => "required|string|unique:roles,name," . $id,
             "editPermissions" => "array"
         ]);
 
