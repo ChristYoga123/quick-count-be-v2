@@ -43,6 +43,11 @@ return [
                     'title' => 'Capres',
                     'url' => 'admin/master/capres',
                     'permission' => ['Capres.web.index'],
+                ],
+                [
+                    'title' => 'Cakada',
+                    'url' => 'admin/master/cakada',
+                    'permission' => ['Cakada.web.index'],
                 ]
             ]
         ],

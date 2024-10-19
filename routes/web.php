@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CakadaController;
 use App\Http\Controllers\Admin\CalegController;
 use App\Http\Controllers\Admin\CapresController;
 use App\Http\Controllers\Admin\ConditionalQuestionController;
@@ -52,6 +53,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::resource('partai', PartaiController::class);
         Route::resource('caleg', CalegController::class);
         Route::resource('capres', CapresController::class);
+        Route::resource('cakada', CakadaController::class);
     });
 
     Route::prefix('survey')->name('survey.')->group(function () {

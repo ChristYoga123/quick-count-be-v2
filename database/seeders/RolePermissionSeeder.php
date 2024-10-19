@@ -30,6 +30,7 @@ class RolePermissionSeeder extends Seeder
         $this->createPermissionRoles('Partai', 'web');
         $this->createPermissionRoles('Caleg', 'web');
         $this->createPermissionRoles('Capres', 'web');
+        $this->createPermissionRoles('Cakada', 'web');
 
         $this->createPermissionRoles('Survey', 'web');
         $this->createPermissionRoles('Laporan', 'web');
