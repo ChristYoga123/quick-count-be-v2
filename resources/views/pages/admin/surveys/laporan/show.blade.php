@@ -14,7 +14,9 @@
                     <table class="datatables table border-top" id="survey-detail">
                         <thead>
                             <tr>
-                                <th>Judul</th>
+                                <th>Kelurahan</th>
+                                <th>Surveyor</th>
+                                <th>Nama Responden</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -35,8 +37,16 @@
             serverSide: true,
             ajax: `{{ route('admin.survey.laporan.show', $survey->id) }}`,
             columns: [{
-                    data: 'judul',
-                    name: 'judul'
+                    data: 'kelurahan',
+                    name: 'kelurahan'
+                },
+                {
+                    data: 'surveyor.name',
+                    name: 'surveyor.name'
+                },
+                {
+                    data: 'nama_responden',
+                    name: 'nama_responden'
                 },
                 {
                     data: 'action',

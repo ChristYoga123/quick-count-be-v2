@@ -64,6 +64,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::resource('perkondisian', ConditionalQuestionController::class);
         Route::get('laporan', [LaporanSurveyController::class, 'index'])->name('laporan.index');
         Route::get('laporan/{surveyTitle}', [LaporanSurveyController::class, 'show'])->name('laporan.show');
+        Route::get('laporan/{surveyDetail}/jawaban', [LaporanSurveyController::class, 'showAnswer'])->name('laporan.showAnswer');
     });
 
     Route::prefix('laporan')->name('laporan.')->group(function () {
