@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\LaporanSurveyController;
 use App\Http\Controllers\Admin\PartaiController;
 use App\Http\Controllers\Admin\PetugasController;
 use App\Http\Controllers\Admin\RealCountPartaiController;
+use App\Http\Controllers\Admin\RealCountPilkadaController;
 use App\Http\Controllers\Admin\RealCountPillegController;
 use App\Http\Controllers\Admin\RealCountPresidenController;
 use App\Http\Controllers\Admin\RoleController;
@@ -37,6 +38,8 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/admin/dashboard');
 Route::get('petugas/export', [PetugasController::class, 'export'])->name('petugas.export');
 Route::get('real-count/pilpres/export', [RealCountPresidenController::class, 'export'])->name('real-count.pilpres.export');
+Route::get('real-count/pilkada/export', [RealCountPilkadaController::class, 'export'])->name('real-count.pilkada.export');
+
 require __DIR__ . '/auth.php';
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -86,5 +89,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('pilpar/{dapil}', [RealCountPartaiController::class, 'show'])->name('pilpar.show');
         Route::get('pileg', [RealCountPillegController::class, 'index'])->name('pileg');
         Route::get('pileg/{partai}/{dapil}', [RealCountPillegController::class, 'show'])->name('pileg.show');
+        Route::get('pilkada', [RealCountPilkadaController::class, 'index'])->name('pilkada');
+        Route::get('pilkada/{dapil}', [RealCountPilkadaController::class, 'show'])->name('pilkada.show');
     });
 });

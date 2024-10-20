@@ -94,6 +94,11 @@ return [
                     'title' => 'Pemilihan Legislatif',
                     'url' => 'admin/real-count/pileg',
                     'permission' => ['Real Count.web.index'],
+                ],
+                [
+                    'title' => 'Pemilihan Kepala Daerah',
+                    'url' => 'admin/real-count/pilkada',
+                    'permission' => ['Real Count.web.index'],
                 ]
             ]
         ],
