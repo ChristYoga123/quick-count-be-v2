@@ -20,4 +20,9 @@ class SurveyDetail extends Model
     {
         return $this->hasMany(SurveyAnswer::class);
     }
+
+    public function surveyTitle()
+    {
+        return $this->belongsTo(SurveyTitle::class);
+    }
 }

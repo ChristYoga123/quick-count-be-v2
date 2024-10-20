@@ -37,6 +37,7 @@ class SurveyController extends Controller
     public function answer(Request $request)
     {
         $request->validate([
+            'survey_title_id' => 'required|exists:survey_titles,id',
             'kecamatan' => 'required',
             'kelurahan' => 'required',
             'nama_responden' => 'required',
@@ -44,6 +45,7 @@ class SurveyController extends Controller
             'answers.*.survey_question_id' => 'required|exists:survey_questions,id',
             'answers.*.answer' => 'nullable',
         ], [
+            'survey_title_id.required' => 'Judul Survey tidak boleh kosong',
             'kecamatan.required' => 'Kecamatan tidak boleh kosong',
             'kelurahan.required' => 'Kelurahan tidak boleh kosong',
             'nama_responden.required' => 'Nama Responden tidak boleh kosong',
@@ -56,6 +58,7 @@ class SurveyController extends Controller
         DB::beginTransaction();
         try {
             $surveyDetail = SurveyDetail::create([
+                'survey_title_id' => $request->survey_title_id,
                 'surveyor_id' => auth('api')->user()->id,
                 'kecamatan' => $request->kecamatan,
                 'kelurahan' => $request->kelurahan,

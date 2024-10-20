@@ -122,6 +122,11 @@ return [
                     'title' => 'Perkondisian Pertanyaan',
                     'url' => 'admin/survey/perkondisian',
                     'permission' => ['Survey.web.index'],
+                ],
+                [
+                    'title' => 'Laporan Survey',
+                    'url' => 'admin/survey/laporan',
+                    'permission' => ['Survey.web.index'],
                 ]
             ]
         ],

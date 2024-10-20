@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LaporanPillegController;
 use App\Http\Controllers\Admin\LaporanPilparController;
 use App\Http\Controllers\Admin\LaporanPilpresController;
+use App\Http\Controllers\Admin\LaporanSurveyController;
 use App\Http\Controllers\Admin\PartaiController;
 use App\Http\Controllers\Admin\PetugasController;
 use App\Http\Controllers\Admin\RealCountPartaiController;
@@ -61,6 +62,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::resource('kategori', SurveyCategoryController::class);
         Route::resource('pertanyaan', SurveyQuestionController::class);
         Route::resource('perkondisian', ConditionalQuestionController::class);
+        Route::get('laporan', [LaporanSurveyController::class, 'index'])->name('laporan.index');
+        Route::get('laporan/{surveyTitle}', [LaporanSurveyController::class, 'show'])->name('laporan.show');
     });
 
     Route::prefix('laporan')->name('laporan.')->group(function () {
